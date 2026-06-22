@@ -74,6 +74,25 @@
   .btn-start:hover{ background:var(--green-dark); transform:translateY(-1px); box-shadow:0 8px 22px rgba(45,71,68,.34); }
   .btn-start:active{ transform:translateY(0); }
 
+  /* welcome — personal note */
+  #screen-welcome .stage{ gap:18px; padding-bottom:34px; }
+  .welcome-title{ font-size:44px; }
+  .wel-greet{ display:flex; align-items:center; gap:9px; color:var(--muted); font-size:16px; }
+  .wel-greet .wel-leaf{ color:var(--green); flex:0 0 auto; }
+  .wel-note{ width:560px; max-width:88%; background:var(--card); border:1px solid var(--line);
+    border-radius:18px; padding:22px 24px; box-shadow:0 1px 3px rgba(0,0,0,.04); text-align:right; }
+  .wel-note-head{ display:flex; align-items:center; gap:12px; margin-bottom:13px; }
+  .wel-avatar{ width:44px; height:44px; border-radius:50%; background:#e8f0ed; color:var(--green);
+    display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:600; flex:0 0 auto; }
+  .wel-note-name{ font-size:16px; font-weight:600; color:var(--ink); }
+  .wel-note-role{ font-size:13px; color:var(--faint); margin-top:1px; }
+  .wel-note-text{ font-size:16.5px; line-height:1.75; color:#374151; }
+  .wel-meta{ display:flex; align-items:center; gap:16px; color:var(--muted); font-size:14px;
+    flex-wrap:wrap; justify-content:center; }
+  .wel-meta span{ display:flex; align-items:center; gap:6px; }
+  .wel-meta svg{ color:var(--green); flex:0 0 auto; }
+  .wel-meta .wel-dot{ color:#d1d5db; }
+
   /* shared bottom action bar */
   .actionbar{ padding:18px 32px 26px; display:flex; justify-content:flex-end; }
   .btn-next{
@@ -186,6 +205,21 @@
   .rm-card.selected{ border-color:var(--green); box-shadow:0 0 0 2px var(--green); }
   .rm-card.used{ opacity:.22; pointer-events:none; }
 
+  /* colored illustration cards — soft botanical tints (image cards only) */
+  #gr-sources .gr-card:nth-child(1),
+  #mp-cards .mp-card:nth-child(1),
+  #rm-cards .rm-card:nth-child(1){ background:#eaf3ea; }
+  #gr-sources .gr-card:nth-child(2),
+  #mp-cards .mp-card:nth-child(2),
+  #rm-cards .rm-card:nth-child(2){ background:#f9f1e3; }
+  #gr-sources .gr-card:nth-child(3),
+  #mp-cards .mp-card:nth-child(3),
+  #rm-cards .rm-card:nth-child(3){ background:#f9ece7; }
+  #gr-sources .gr-card:nth-child(4),
+  #mp-cards .mp-card:nth-child(4),
+  #rm-cards .rm-card:nth-child(4){ background:#e8f1f6; }
+  #gr-sources .gr-card:nth-child(5){ background:#f0ecf8; }
+
   .rm-panel{
     flex:0.82; background:var(--card); border:1px solid var(--line); border-radius:16px;
     position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -245,8 +279,32 @@
       <span class="spacer"></span>
     </div>
     <div class="stage">
-      <h1 class="welcome-title">שלום אברהם כהן</h1>
-      <button class="btn-start" onclick="go('screen-growth')">התחל תרגול</button>
+      <div class="wel-greet">
+        <svg class="wel-leaf" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+        <span id="wel-time">בוקר טוב</span>
+      </div>
+      <h1 class="welcome-title">שלום אברהם</h1>
+
+      <div class="wel-note">
+        <div class="wel-note-head">
+          <div class="wel-avatar">ש</div>
+          <div>
+            <div class="wel-note-name">ד״ר שחר לוי</div>
+            <div class="wel-note-role">קלינאית התקשורת שלך</div>
+          </div>
+        </div>
+        <p class="wel-note-text">היום נעבור יחד על כמה תרגילים קצרים, בקצב שלך. אני יושבת כאן לצידך לכל אורך הדרך — אין מבחן ואין לחץ, פשוט ננסה צעד אחרי צעד.</p>
+      </div>
+
+      <div class="wel-meta">
+        <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>5 תרגילים</span>
+        <span class="wel-dot">·</span>
+        <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>בערך 20 דקות</span>
+        <span class="wel-dot">·</span>
+        <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>אפשר לעצור בכל רגע</span>
+      </div>
+
+      <button class="btn-start" onclick="go('screen-growth')">מתחילים, כשתהיה מוכן</button>
     </div>
   </section>
 
@@ -380,6 +438,17 @@
     if(id==='screen-remember' && typeof rmStart==='function') rmStart();
     rtOnScreen(id);
   }
+
+  // ── time-aware greeting ──
+  (function setGreeting(){
+    var h = new Date().getHours(), t;
+    if(h>=5 && h<12) t='בוקר טוב';
+    else if(h>=12 && h<17) t='צהריים טובים';
+    else if(h>=17 && h<22) t='ערב טוב';
+    else t='לילה טוב';
+    var el = document.getElementById('wel-time');
+    if(el) el.textContent = t;
+  })();
 
   // ── Growth sequence exercise ──
   const GR_CORRECT = ["tree_acorn", "tree_sapling", "tree_young", "tree_mature", "tree_ancient"];
