@@ -350,11 +350,35 @@
 </div>
 
 <script>
+  /* ── Real-time sync → clinician monitor (same-origin BroadcastChannel) ── */
+  var rtChan = (typeof BroadcastChannel!=='undefined') ? new BroadcastChannel('neurocanopy-rt') : null;
+  var rtEx = { 'screen-growth':{i:1}, 'screen-missing':{i:2}, 'screen-remember':{i:3} };
+  var rtTimes = [null,null,null];
+  var rtCur = { index:0, seconds:0, actions:0, accuracy:0, responseTime:0, fails:0, struggling:false };
+  var rtTick = null;
+  function rtSend(){ if(rtChan) rtChan.postMessage({ type:'state', exIndex:rtCur.index, exTotal:3, curSeconds:rtCur.seconds, exTimes:rtTimes.slice(), actions:rtCur.actions, accuracy:rtCur.accuracy, responseTime:rtCur.responseTime, struggling:!!rtCur.struggling, failCount:rtCur.fails||0 }); }
+  function rtEnterExercise(id){
+    var ex=rtEx[id]; if(!ex) return;
+    if(rtCur.index>0 && rtCur.index!==ex.i) rtTimes[rtCur.index-1]=rtCur.seconds;
+    rtCur.index=ex.i; rtCur.seconds=0; rtCur.actions=0; rtCur.accuracy=0; rtCur.fails=0; rtCur.struggling=false;
+    if(rtTick) clearInterval(rtTick);
+    rtTick=setInterval(function(){ rtCur.seconds++; rtSend(); }, 1000);
+    rtSend();
+  }
+  function rtAction(){ rtCur.actions++; rtSend(); }
+  function rtFail(){ rtCur.fails=(rtCur.fails||0)+1; if(rtCur.fails>=2){ rtCur.struggling=true; rtCur.accuracy=-12; } rtSend(); return rtCur.struggling===true; }
+  function rtResult(acc, resp){ if(typeof acc==='number') rtCur.accuracy=acc; if(typeof resp==='number') rtCur.responseTime=resp; rtSend(); }
+  function rtOnScreen(id){
+    if(rtEx[id]) rtEnterExercise(id);
+    else if(id==='screen-done'){ if(rtCur.index>0) rtTimes[rtCur.index-1]=rtCur.seconds; if(rtTick){ clearInterval(rtTick); rtTick=null; } rtSend(); }
+  }
+
   function go(id){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
     const el=document.getElementById(id);
     if(el) el.classList.add('active');
     if(id==='screen-remember' && typeof rmStart==='function') rmStart();
+    rtOnScreen(id);
   }
 
   // ── Growth sequence exercise ──
@@ -363,6 +387,7 @@
   function grClearFeedback(){ const fb=document.getElementById('gr-feedback'); fb.textContent=''; fb.className='gr-feedback';
     document.querySelectorAll('.gr-slot').forEach(s=>s.classList.remove('correct','wrong')); }
   function grPlace(slot, key){
+    if(typeof rtAction==='function') rtAction();
     // if slot already has an item, free it
     const prev = slot.dataset.key;
     if(prev){ document.getElementById('src-'+prev).classList.remove('used'); }
@@ -390,7 +415,11 @@
       s.classList.add(ok?'correct':'wrong'); if(!ok) allOk=false; });
     const fb=document.getElementById('gr-feedback');
     if(allOk){ fb.textContent='כל הכבוד! סידרת נכון את שלבי הגדילה 🌳'; fb.className='gr-feedback ok'; }
-    else{ fb.textContent='כמעט! בדקו שוב את הסדר.'; fb.className='gr-feedback no'; }
+    else{
+      var _stuck = (typeof rtFail==='function') && rtFail();
+      fb.textContent = _stuck ? 'נראה שזה מאתגר — ד״ר שחר רואה אותך ותסייע 💚' : 'כמעט! בדקו שוב את הסדר.';
+      fb.className='gr-feedback no';
+    }
   }
   function grInit(){
     document.querySelectorAll('#gr-sources .gr-card').forEach(card=>{
@@ -419,6 +448,7 @@
   const MP_CORRECT = 'flower';
   let mpSelected = null;
   function mpPlace(key){
+    if(typeof rtAction==='function') rtAction();
     const slot = document.getElementById('mp-slot');
     const fb = document.getElementById('mp-feedback');
     const ok = key===MP_CORRECT;
@@ -430,7 +460,9 @@
       fb.textContent='כל הכבוד! זיהית את החלק החסר 🌼'; fb.className='mp-feedback ok';
     } else {
       slot.classList.add('wrong');
-      fb.textContent='זה לא החלק החסר, נסו שוב.'; fb.className='mp-feedback no';
+      var _stuck = (typeof rtFail==='function') && rtFail();
+      fb.textContent = _stuck ? 'נראה שזה מאתגר — ד״ר שחר רואה אותך ותסייע 💚' : 'זה לא החלק החסר, נסו שוב.';
+      fb.className='mp-feedback no';
       setTimeout(()=>slot.classList.remove('wrong'), 500);
     }
   }
@@ -459,6 +491,7 @@
   let rmDone = false;
   function rmReveal(key){
     if(rmDone) return;
+    if(typeof rtAction==='function') rtAction();
     const panel=document.getElementById('rm-panel');
     document.getElementById('rm-q').style.display='none';
     document.getElementById('rm-hint').style.display='none';

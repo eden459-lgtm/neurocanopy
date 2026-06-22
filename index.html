@@ -675,6 +675,45 @@
     .rt-timer-colon { font-size:26px; font-weight:300; color:#c4cdd6; }
     .rt-timer-units { display:flex; gap:8px; width:132px; justify-content:space-between; direction:ltr; }
     .rt-timer-unit  { width:62px; text-align:center; font-size:11px; color:#9ca3af; }
+    .rt-timer-cap { font-size:10px; color:#9ca3af; margin-top:5px; }
+    /* live badge */
+    .rt-live { font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:6px; vertical-align:middle; margin-right:8px; }
+    .rt-live.on  { background:#dcfce7; color:#15803d; }
+    .rt-live.off { background:#f3f4f6; color:#9ca3af; }
+    .rt-live-dot { width:7px; height:7px; border-radius:50%; background:currentColor; flex-shrink:0; }
+    .rt-live.on .rt-live-dot { animation:rtPulse 1.4s infinite; }
+    @keyframes rtPulse { 0%{box-shadow:0 0 0 0 rgba(34,197,94,.5);} 70%{box-shadow:0 0 0 6px rgba(34,197,94,0);} 100%{box-shadow:0 0 0 0 rgba(34,197,94,0);} }
+    /* exercise stepper */
+    .rt-exsteps { display:flex; gap:11px; flex-shrink:0; margin-bottom:14px; }
+    .rt-exstep { flex:1; display:flex; align-items:center; gap:10px; padding:11px 14px; background:white; border:1px solid #eaeaea; border-radius:12px; transition:border-color .15s, box-shadow .15s; }
+    .rt-exstep.active { border-color:#2d4744; box-shadow:0 0 0 2px rgba(45,71,68,.08); }
+    .rt-exstep.pending { opacity:.55; }
+    .rt-exstep-ic { width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+    .rt-exstep.done .rt-exstep-ic   { background:#dcfce7; color:#15803d; }
+    .rt-exstep.active .rt-exstep-ic { background:#2d4744; color:white; }
+    .rt-exstep.pending .rt-exstep-ic{ border:1.5px solid #d1d5db; color:#b0b8c1; }
+    .rt-exstep-info { flex:1; text-align:right; min-width:0; }
+    .rt-exstep-name { font-size:12.5px; font-weight:600; color:#1f2937; }
+    .rt-exstep-sub  { font-size:10.5px; color:#9ca3af; margin-top:1px; }
+    .rt-exstep-time { font-size:13px; font-weight:700; color:#2d4744; direction:ltr; flex-shrink:0; }
+    .rt-exstep.pending .rt-exstep-time { color:#c4cdd6; }
+    /* side ownership headers */
+    .rt-side-head { margin-bottom:10px; }
+    .rt-side-badge { font-size:11px; font-weight:600; padding:5px 12px; border-radius:20px; display:inline-flex; align-items:center; gap:7px; }
+    .rt-side-badge.clin { background:#e8f0ee; color:#2d4744; }
+    .rt-side-badge.pat  { background:#eef3fb; color:#1d5b94; }
+    .rt-pat-dot { width:7px; height:7px; border-radius:50%; background:#22c55e; flex-shrink:0; animation:rtPulse 1.4s infinite; }
+    .rt-controls-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .rt-stat-sub { font-size:11px; color:#9ca3af; margin-top:3px; }
+    .rt-sysnotes { display:flex; flex-direction:column; }
+    .rt-note { display:flex; gap:8px; align-items:flex-start; font-size:11.5px; line-height:1.45; padding:8px 0; border-top:1px solid #f5f5f3; text-align:right; transition:background .2s; }
+    .rt-note:first-of-type { border-top:none; padding-top:4px; }
+    .rt-note-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:4px; }
+    .rt-note.good { color:#15803d; }
+    .rt-note.good .rt-note-dot { background:#22c55e; }
+    .rt-note.bad { color:#b91c1c; }
+    .rt-note.bad .rt-note-dot { background:#ef4444; }
+    .rt-note.bad.alert { background:#fef2f2; border-radius:8px; padding:8px 10px; margin-top:2px; }
     /* Control buttons */
     .rt-controls { display:flex; gap:10px; flex-wrap:wrap; }
     .rt-btn-stop  {
@@ -739,7 +778,7 @@
     /* ══ TRAINING SUMMARY SCREEN ══ */
     #screen-tsummary { position:absolute; inset:0; display:none; flex-direction:column; background:#f5f5f3; font-family:'Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
     .ts-main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
-    .ts-scroll { flex:1; overflow:hidden; padding:14px 30px; display:flex; flex-direction:column; gap:9px; }
+    .ts-scroll { flex:1; overflow-y:auto; padding:14px 30px; display:flex; flex-direction:column; gap:9px; }
     .ts-header { display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; }
     .ts-header h1 { font-size:30px; font-weight:700; color:#1f2937; margin:2px 0 0; }
     .ts-pdf-btn { display:flex; align-items:center; gap:6px; padding:8px 14px; background:white; color:#374151; border:1px solid #e5e7eb; border-radius:9px; font-size:12px; font-weight:500; cursor:pointer; font-family:inherit; transition:background .15s; }
@@ -751,16 +790,18 @@
     .ts-auto-tag { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:#6b8b83; background:#f1f6f4; padding:4px 9px; border-radius:20px; }
     .ts-auto-tag.sm { font-size:9.5px; }
 
-    .ts-insights { display:flex; gap:11px; flex-shrink:0; }
-    .ts-insight { flex:1; display:flex; gap:8px; padding:10px 13px; border-radius:13px; border:1px solid; }
-    .ts-insight p { font-size:11.5px; line-height:1.55; margin:0; text-align:right; }
+    .ts-insights { display:flex; gap:12px; flex-shrink:0; }
+    .ts-insight { flex:1; display:flex; gap:10px; padding:14px 16px; border-radius:14px; border:1.5px solid; box-shadow:0 1px 3px rgba(0,0,0,.03); }
+    .ts-in-body { text-align:right; }
+    .ts-in-label { font-size:12px; font-weight:700; margin-bottom:3px; }
+    .ts-insight p { font-size:12px; line-height:1.5; margin:0; text-align:right; }
     .ts-in-ic { flex-shrink:0; margin-top:1px; }
     .ts-in-green { background:#f0faf4; border-color:#bbe6cd; }
-    .ts-in-green .ts-in-ic, .ts-in-green p { color:#15803d; }
+    .ts-in-green .ts-in-ic, .ts-in-green .ts-in-label, .ts-in-green p { color:#15803d; }
     .ts-in-amber { background:#fffaf0; border-color:#f3e0b5; }
-    .ts-in-amber .ts-in-ic, .ts-in-amber p { color:#b45309; }
+    .ts-in-amber .ts-in-ic, .ts-in-amber .ts-in-label, .ts-in-amber p { color:#b45309; }
     .ts-in-blue { background:#f0f6fb; border-color:#c2dcf0; }
-    .ts-in-blue .ts-in-ic, .ts-in-blue p { color:#1d5b94; }
+    .ts-in-blue .ts-in-ic, .ts-in-blue .ts-in-label, .ts-in-blue p { color:#1d5b94; }
 
     .ts-cols { display:flex; gap:13px; align-items:stretch; }
     .ts-doc-card { flex:1; background:white; border-radius:15px; border:1px solid #ececea; padding:13px 18px; display:flex; flex-direction:column; }
@@ -777,6 +818,9 @@
     .ts-mode { font-size:10.5px; color:#6b7280; background:#f3f4f2; padding:4px 10px; border-radius:8px; cursor:pointer; }
     .ts-mode.active { background:#2d4744; color:white; }
     .ts-doc-text { flex:1; min-height:120px; border:1px solid #f0f0ee; border-radius:11px; padding:12px 16px; font-size:13px; color:#374151; line-height:1.6; text-align:right; background:#fafafa; }
+    #screen-tsummary .ts-doc-text { flex:0 0 auto; width:100%; box-sizing:border-box; min-height:48px; height:auto; resize:none; overflow:hidden; outline:none; font-family:inherit; direction:rtl; transition:border-color .15s, background .15s; }
+    #screen-tsummary .ts-doc-text:focus { border-color:#c4cdd6; background:#fff; }
+    #screen-tsummary .ts-doc-text::placeholder { color:#c4cdd6; }
 
     .ts-sys-card { background:white; border-radius:15px; border:1px solid #ececea; padding:12px 18px; }
     .ts-sys-row { font-size:12px; color:#374151; line-height:1.6; text-align:right; padding:7px 0; border-bottom:1px solid #f5f5f3; }
@@ -2263,52 +2307,63 @@
       </div>
 
       <!-- Main -->
-      <div class="rt-main">
+  <div class="rt-main">
               <div class="rt-top">
                 <div class="rt-title-block">
                   <div class="rt-breadcrumb" onclick="navigate('dashboard')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>חזרה למסך הבית</div>
-                  <h1>זמן אמת</h1>
-                  <p>אברהם כהן &bull; 24.10.2026 &bull; תרגיל רצף גדילה &ndash; בניית רצף בינונית &ndash; תרגיל 2 מתוך 3</p>
+                  <h1>זמן אמת <span class="rt-live off" id="rt-live"><span class="rt-live-dot"></span><span class="rt-live-txt">ממתין לחיבור</span></span></h1>
+                  <p>מטופל: <strong>אברהם כהן</strong> · מבצע כעת: <strong id="rt-cur-ex">מה חסר בצמח</strong></p>
                 </div>
                 <div class="rt-timer-mini">
                   <div class="rt-timer-display">
-                    <div class="rt-timer-box" id="rt-minutes">4</div>
+                    <div class="rt-timer-box" id="rt-minutes">1</div>
                     <span class="rt-timer-colon">:</span>
-                    <div class="rt-timer-box" id="rt-seconds">30</div>
+                    <div class="rt-timer-box" id="rt-seconds">45</div>
                   </div>
-                  <div class="rt-timer-units"><span class="rt-timer-unit">דקות</span><span class="rt-timer-unit">שניות</span></div>
+                  <div class="rt-timer-cap">זמן בתרגיל הנוכחי</div>
                 </div>
               </div>
 
+              <div class="rt-exsteps">
+                <div class="rt-exstep done" id="rt-step-0"><span class="rt-exstep-ic">✓</span><div class="rt-exstep-info"><div class="rt-exstep-name">רצף גדילה</div><div class="rt-exstep-sub">הושלם</div></div><span class="rt-exstep-time">3:12</span></div>
+                <div class="rt-exstep active" id="rt-step-1"><span class="rt-exstep-ic">●</span><div class="rt-exstep-info"><div class="rt-exstep-name">מה חסר בצמח</div><div class="rt-exstep-sub">פעיל כעת</div></div><span class="rt-exstep-time">1:45</span></div>
+                <div class="rt-exstep pending" id="rt-step-2"><span class="rt-exstep-ic">○</span><div class="rt-exstep-info"><div class="rt-exstep-name">זכרו את הצמח</div><div class="rt-exstep-sub">ממתין</div></div><span class="rt-exstep-time">—</span></div>
+              </div>
+
               <div class="rt-work">
+                <!-- Clinician side -->
                 <div class="rt-notes-card">
-                  <div class="rt-notes-head"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg><span class="rt-notes-label">כתיבת הערות</span></div>
-                  <textarea class="rt-notes-area" placeholder=""></textarea>
-                  <button class="rt-btn-save">שמור</button>
+                  <div class="rt-side-head"><span class="rt-side-badge clin">הקלינאית · ניטור ובקרה</span></div>
+                  <textarea class="rt-notes-area" placeholder="כתיבת הערות תוך כדי הצפייה במטופל..."></textarea>
+                  <div class="rt-controls-row">
+                    <button class="rt-btn-stop" onclick="stopRealtimeExercise()">עצירת תרגיל</button>
+                    <button class="rt-btn-summary" onclick="navigate('tsummary')">הוספת סיכום תרגול</button>
+                    <button class="rt-btn-save">שמירת הערה</button>
+                  </div>
                 </div>
+                <!-- Patient side -->
                 <div class="rt-panel-right">
+                  <div class="rt-side-head"><span class="rt-side-badge pat"><span class="rt-pat-dot"></span>המטופל · בזמן אמת</span></div>
                   <div class="rt-stat-card">
                     <div class="rt-stat-label">אחוזי הצלחה</div>
-                    <div class="rt-stat-value negative">&minus;5%</div>
-                    <div class="rt-stat-sub">15%! מהמפגש הקודם, שגיאה אחת בלבד</div>
+                    <div class="rt-stat-value negative" id="rt-stat-acc">&minus;5%</div>
+                    <div class="rt-stat-sub">לעומת המפגש הקודם</div>
                   </div>
                   <div class="rt-stat-card">
                     <div class="rt-stat-label">מספר פעולות/קליקים</div>
-                    <div class="rt-stat-value">7</div>
-                    <div class="rt-stat-sub">+2 מצורף התרגיל</div>
+                    <div class="rt-stat-value" id="rt-stat-actions">7</div>
+                    <div class="rt-stat-sub">בתרגיל הנוכחי</div>
                   </div>
                   <div class="rt-stat-card">
                     <div class="rt-stat-label">זמן תגובה</div>
-                    <div class="rt-stat-value">50 שניות</div>
+                    <div class="rt-stat-value" id="rt-stat-resp">50 שניות</div>
                     <div class="rt-stat-sub">זמן התלבטות גדול</div>
                   </div>
-                  <div class="rt-stat-card">
-                    <div class="rt-stat-label">ניתוח מילולי מעמיק</div>
-                    <div class="rt-stat-analysis">קיימת השתפרות מהמפגשים הקודמים, נראה כי אברהם מצליח בתרגילים ברמה קלה עד בינונית.</div>
-                    <div class="rt-stat-link">התקדמות של 15% אל עבר המטרה.</div>
+                  <div class="rt-stat-card rt-sysnotes" id="rt-sysnotes">
+                    <div class="rt-stat-label">הערות המערכת</div>
+                    <div class="rt-note good"><span class="rt-note-dot"></span><span>שיום מהיר — ביצוע תקין, זמני התגובה משתפרים.</span></div>
+                    <div class="rt-note bad" id="rt-note-bad"><span class="rt-note-dot"></span><span id="rt-note-bad-txt">זיכרון עבודה — אברהם מתקשה: 3 ניסיונות, התלבטות ארוכה. הרמזים האוטומטיים לא סייעו.</span></div>
                   </div>
-                  <button class="rt-btn-stop" onclick="stopRealtimeExercise()">עצירת תרגיל</button>
-                  <button class="rt-btn-summary" onclick="navigate('tsummary')">הוספת סיכום תרגול</button>
                 </div>
               </div>
             </div><!-- /rt-main -->
@@ -2346,16 +2401,16 @@
           </div>
           <div class="ts-insights">
             <div class="ts-insight ts-in-green">
-              <span class="ts-in-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></span>
-              <p>שיפור של 7% בדיוק לעומת המפגש הקודם, בולט במיוחד בתרגילי שיום מהיר וזיהוי רצף.</p>
+              <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></span>
+              <div class="ts-in-body"><div class="ts-in-label">שיפור מרכזי</div><p>שיפור של 7% בדיוק לעומת המפגש הקודם, בולט במיוחד בתרגילי שיום מהיר וזיהוי רצף.</p></div>
             </div>
             <div class="ts-insight ts-in-amber">
-              <span class="ts-in-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-              <p>אזור אתגר: זמן תגובה בתרגילי זיכרון עבודה גבוה ב-14% מהיעד הקליני. מומלץ להמשיך בעומס מדורג.</p>
+              <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+              <div class="ts-in-body"><div class="ts-in-label">אזור אתגר</div><p>אזור אתגר: זמן תגובה בתרגילי זיכרון עבודה גבוה ב-14% מהיעד הקליני. מומלץ להמשיך בעומס מדורג.</p></div>
             </div>
             <div class="ts-insight ts-in-blue">
-              <span class="ts-in-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-              <p>תחזית התקדמות: בקצב הנוכחי, היעד הקליני (500ms) צפוי להיות מושג תוך 2–3 מפגשים נוספים.</p>
+              <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+              <div class="ts-in-body"><div class="ts-in-label">תחזית התקדמות</div><p>תחזית התקדמות: בקצב הנוכחי, היעד הקליני (500ms) צפוי להיות מושג תוך 2–3 מפגשים נוספים.</p></div>
             </div>
           </div>
 
@@ -2378,7 +2433,7 @@
                 </div>
                 <span class="ts-doc-label">הערות ידניות</span>
               </div>
-              <div class="ts-doc-text">אברהם הגיע במצב רוח טוב ועם רצון להתחיל. ניכר שיפור בזרימה המילולית, אך עדיין נצפתה עייפות לקראת הדקה ה-30. מציעה להתחיל את המפגש הבא בתרגיל שטף ולהשאיר את זיכרון העבודה לאמצע המפגש.</div>
+              <textarea class="ts-doc-text" oninput="tsAutoGrow(this)" placeholder="כתיבת הערות...">אברהם הגיע במצב רוח טוב ועם רצון להתחיל.</textarea>
             </div>
 
             <!-- Right: system summary + exercise breakdown -->
@@ -2433,7 +2488,6 @@
           </div>
         </div>
 
-        <!-- Footer: next session -->
         <div class="ts-footer">
           <div class="ts-next">
             <span class="ts-next-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
@@ -2486,6 +2540,11 @@
     document.querySelector('.pt-count-txt').textContent = 'מציג ' + visible.length + ' מתוך 12 מטופלים';
   }
 
+  function tsAutoGrow(el) {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = (el.scrollHeight) + 'px';
+  }
   function _animateScreen(el) {
     el.classList.remove('screen-enter');
     void el.offsetWidth; // force reflow
@@ -2513,6 +2572,7 @@
     if (screen === 'tsummary') {
       var _el = document.getElementById('screen-tsummary');
       _el.style.display = 'flex'; _animateScreen(_el);
+      tsAutoGrow(document.querySelector('#screen-tsummary .ts-doc-text'));
       return;
     }
     var _shell = document.getElementById('app-shell');
@@ -2545,31 +2605,77 @@
     lg.style.display = 'flex'; _animateScreen(lg);
   }
 
-  /* ===== Real-time screen ===== */
+  /* ===== Real-time screen (per-exercise timer + patient sync) ===== */
   var _rtTimer = null;
-  var _rtSeconds = 270; // 4:30 start
+  var _rtLive = false;
+  var _rtLiveTO = null;
+  var RT_EX_NAMES = ['רצף גדילה', 'מה חסר בצמח', 'זכרו את הצמח'];
+  var rtState = { exIndex:2, exTotal:3, curSeconds:105, exTimes:[192,null,null], actions:7, accuracy:-5, responseTime:50, struggling:false, failCount:0 };
 
-  function startRealtimeTimer() {
-    if (_rtTimer) clearInterval(_rtTimer);
-    _rtSeconds = 270;
-    updateRealtimeDisplay();
-    _rtTimer = setInterval(function() {
-      _rtSeconds++;
-      updateRealtimeDisplay();
-    }, 1000);
+  function _rtFmt(sec){ if(sec==null) return '—'; var m=Math.floor(sec/60), s=sec%60; return m+':'+(s<10?'0'+s:s); }
+
+  function rtRender(){
+    var cur=document.getElementById('rt-cur-ex'); if(cur) cur.textContent=RT_EX_NAMES[rtState.exIndex-1]||'';
+    var m=Math.floor(rtState.curSeconds/60), s=rtState.curSeconds%60;
+    var mn=document.getElementById('rt-minutes'); if(mn) mn.textContent=m;
+    var sc=document.getElementById('rt-seconds'); if(sc) sc.textContent=(s<10?'0'+s:s);
+    for(var i=0;i<3;i++){
+      var st=document.getElementById('rt-step-'+i); if(!st) continue;
+      var idx=i+1, cls=idx<rtState.exIndex?'done':(idx===rtState.exIndex?'active':'pending');
+      st.className='rt-exstep '+cls;
+      var ic=st.querySelector('.rt-exstep-ic'), sub=st.querySelector('.rt-exstep-sub'), tm=st.querySelector('.rt-exstep-time');
+      if(cls==='done'){ ic.textContent='✓'; sub.textContent='הושלם'; tm.textContent=_rtFmt(rtState.exTimes[i]); }
+      else if(cls==='active'){ ic.textContent='●'; sub.textContent='פעיל כעת'; tm.textContent=_rtFmt(rtState.curSeconds); }
+      else { ic.textContent='○'; sub.textContent='ממתין'; tm.textContent='—'; }
+    }
+    var acc=document.getElementById('rt-stat-acc'); if(acc) acc.innerHTML=(rtState.accuracy>0?'+':rtState.accuracy<0?'\u2212':'')+Math.abs(rtState.accuracy)+'%';
+    var act=document.getElementById('rt-stat-actions'); if(act) act.textContent=rtState.actions;
+    var rsp=document.getElementById('rt-stat-resp'); if(rsp) rsp.textContent=rtState.responseTime+' שניות';
+    var bad=document.getElementById('rt-note-bad'), badTxt=document.getElementById('rt-note-bad-txt');
+    if(bad && badTxt){
+      if(_rtLive && rtState.struggling){
+        badTxt.textContent=(RT_EX_NAMES[rtState.exIndex-1]||'התרגיל')+' — אברהם מתקשה: '+(rtState.failCount||3)+' ניסיונות, התלבטות ארוכה. הרמזים האוטומטיים לא סייעו.';
+        bad.classList.add('alert');
+      } else if(_rtLive && !rtState.struggling){
+        badTxt.textContent='אין כרגע קושי חריג — המערכת מסייעת כראוי.'; bad.classList.remove('alert');
+      } else { bad.classList.remove('alert'); }
+    }
+    var live=document.getElementById('rt-live');
+    if(live){ live.className='rt-live '+(_rtLive?'on':'off'); var t=live.querySelector('.rt-live-txt'); if(t) t.textContent=_rtLive?'בזמן אמת':'ממתין לחיבור'; }
   }
 
-  function updateRealtimeDisplay() {
-    var m = Math.floor(_rtSeconds / 60);
-    var s = _rtSeconds % 60;
-    document.getElementById('rt-minutes').textContent = m;
-    document.getElementById('rt-seconds').textContent = s < 10 ? '0'+s : s;
+  function startRealtimeTimer(){
+    if(_rtTimer) clearInterval(_rtTimer);
+    rtRender();
+    _rtTimer=setInterval(function(){ if(_rtLive) return; rtState.curSeconds++; rtRender(); }, 1000);
   }
 
-  function stopRealtimeExercise() {
-    if (_rtTimer) { clearInterval(_rtTimer); _rtTimer = null; }
+  function stopRealtimeExercise(){
+    if(_rtTimer){ clearInterval(_rtTimer); _rtTimer=null; }
     navigate('summary');
   }
+
+  // Sync: receive live state from the patient app (same-origin BroadcastChannel)
+  (function(){
+    if(typeof BroadcastChannel==='undefined') return;
+    var ch=new BroadcastChannel('neurocanopy-rt');
+    ch.onmessage=function(e){
+      var d=e.data||{}; if(d.type!=='state') return;
+      _rtLive=true;
+      if(typeof d.exIndex==='number') rtState.exIndex=d.exIndex;
+      if(typeof d.exTotal==='number') rtState.exTotal=d.exTotal;
+      if(typeof d.curSeconds==='number') rtState.curSeconds=d.curSeconds;
+      if(Array.isArray(d.exTimes)) rtState.exTimes=d.exTimes;
+      if(typeof d.actions==='number') rtState.actions=d.actions;
+      if(typeof d.accuracy==='number') rtState.accuracy=d.accuracy;
+      if(typeof d.responseTime==='number') rtState.responseTime=d.responseTime;
+      if(typeof d.struggling==='boolean') rtState.struggling=d.struggling;
+      if(typeof d.failCount==='number') rtState.failCount=d.failCount;
+      rtRender();
+      clearTimeout(_rtLiveTO);
+      _rtLiveTO=setTimeout(function(){ _rtLive=false; rtRender(); }, 6000);
+    };
+  })();
 
 
   /* ===== Pagination ===== */
