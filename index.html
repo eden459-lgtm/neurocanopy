@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { min-height:100vh; background:#9ca3af; display:flex; align-items:center; justify-content:center; font-family:'Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
+    body { min-height:100vh; background:#9ca3af; display:flex; align-items:center; justify-content:center; font-family:'Simpler Pro','Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
 
     .ipad { width:1194px; height:834px; border-radius:32px; box-shadow:0 25px 60px rgba(0,0,0,.35); overflow:hidden; position:relative; }
 
@@ -515,7 +515,173 @@
     .enr-lbl { color:#374151; }
     .enr-val { color:#2d4744; font-weight:700; }
     .enr-foot { margin-top:auto; font-size:11px; color:#b45309; background:#fef9ed; border-radius:8px; padding:8px 11px; text-align:right; }
-    .research-jrnl { font-size:10.5px; color:#6b8b83; font-weight:600; margin-top:3px; }
+    .research-jrnl { font-size:10.5px; color:#3a5a55; font-weight:600; margin-top:3px; }
+
+    /* ── Research screen — ProQuest-style layout (rsx-) ── */
+    #content-research .dash-content { background:#f3f3f1; padding:0; overflow:hidden; }
+
+    .rsx-banner { background:#3a5a55; padding:34px 24px 26px; flex-shrink:0; position:relative; overflow:visible; text-align:center; }
+    .rsx-banner-fx::after { content:''; position:absolute; right:-70px; top:-90px; width:280px; height:280px; border-radius:50%; border:1px solid rgba(255,255,255,.08); pointer-events:none; }
+    .rsx-banner-fx::before { content:''; position:absolute; left:-60px; bottom:-120px; width:240px; height:240px; border-radius:50%; border:1px solid rgba(255,255,255,.07); pointer-events:none; }
+    .rsx-banner-fx { position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+    .rsx-banner-inner { max-width:800px; margin:0 auto; position:relative; z-index:1; }
+    .rsx-bannercrumb { position:absolute; top:14px; right:24px; z-index:2; }
+    .rsx-banner .patient-nav { color:rgba(255,255,255,.82); margin:0; }
+    .rsx-banner .patient-nav:hover { color:#fff; }
+    .rsx-title { font-size:32px; font-weight:700; color:#fdfcf8; line-height:1.1; }
+    .rsx-tabs { display:flex; justify-content:center; gap:26px; margin-top:14px; border-bottom:1px solid rgba(255,255,255,.16); }
+    .rsx-tab { font-size:12.5px; color:#cddbd6; padding:0 2px 9px; cursor:pointer; position:relative; white-space:nowrap; transition:color .15s; }
+    .rsx-tab:hover { color:#fff; }
+    .rsx-tab.active { color:#fff; font-weight:600; }
+    .rsx-tab.active::after { content:''; position:absolute; right:0; left:0; bottom:-1px; height:2px; background:#fff; border-radius:2px; }
+
+    .rsx-mod { background:rgba(0,0,0,.14); border-radius:12px; padding:14px 16px; margin-top:16px; }
+    .rsx-chips { display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin-bottom:11px; }
+    .rsx-chip-f { font-size:11.5px; color:#e3ece9; background:transparent; border:1px solid rgba(255,255,255,.3); border-radius:99px; padding:5px 15px; cursor:pointer; transition:border-color .15s, background .15s, color .15s; }
+    .rsx-chip-f:hover { border-color:rgba(255,255,255,.65); }
+    .rsx-chip-f.active { background:#fff; color:#3a5a55; border-color:#fff; font-weight:600; }
+    .rsx-searchbar { display:flex; background:#fff; border-radius:9px; overflow:hidden; height:44px; box-shadow:0 2px 8px rgba(0,0,0,.12); }
+    .rsx-searchbar input { flex:1; border:none; outline:none; padding:0 16px; font-size:13.5px; color:#374151; font-family:inherit; text-align:right; direction:rtl; background:transparent; }
+    .rsx-searchbar input::placeholder { color:#adb3ba; }
+    .rsx-searchbtn { width:52px; background:#3a5a55; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; transition:background .15s; }
+    .rsx-searchbtn:hover { background:#48706a; }
+    .rsx-modmeta { display:flex; justify-content:center; gap:18px; margin-top:11px; font-size:11px; color:#b3c6c1; }
+    .rsx-modmeta b { color:#eef3f1; font-weight:700; }
+
+    .rsx-cards { flex:1; display:flex; gap:12px; padding:16px 24px 18px; min-height:0; }
+    .rsx-col { flex:1; background:#fff; border:1px solid #ececea; border-radius:14px; box-shadow:0 1px 3px rgba(0,0,0,.04); padding:14px 16px 8px; display:flex; flex-direction:column; min-width:0; overflow:hidden; }
+    .rsx-sechead { display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-shrink:0; }
+    .rsx-sechead span { font-size:14px; font-weight:700; color:#3a5a55; white-space:nowrap; }
+    .rsx-sechead i { flex:1; height:1px; background:#ececea; }
+    .rsx-list { flex:1; min-height:0; overflow-y:auto; }
+    .rsx-seclink { font-size:10.5px; color:#3a5a55; cursor:pointer; text-align:center; padding-top:8px; margin-top:auto; flex-shrink:0; border-top:1px solid #f0f0ee; }
+    .rsx-seclink:hover { text-decoration:underline; }
+
+    .rsx-art { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid #f0f0ee; cursor:pointer; }
+    .rsx-art:last-child { border-bottom:none; }
+    .rsx-art:hover .rsx-art-name { color:#3a5a55; }
+    .rsx-num { font-size:13px; font-weight:600; color:#c4cdd6; min-width:20px; text-align:center; flex-shrink:0; line-height:1.4; }
+    .rsx-art-info { flex:1; min-width:0; }
+    .rsx-art-name { font-size:12px; font-weight:500; color:#1f2937; line-height:1.4; transition:color .15s; }
+    .rsx-doc { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid #f0f0ee; }
+    .rsx-doc:last-child { border-bottom:none; }
+    .rsx-doc-ic { width:30px; height:30px; border-radius:9px; background:#eef2ea; color:#3a5a55; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .rsx-doc-info { flex:1; min-width:0; }
+    .rsx-doc-name { font-size:12px; font-weight:500; color:#1f2937; line-height:1.35; }
+    .rsx-doc-dl { color:#b3b8bd; cursor:pointer; flex-shrink:0; display:flex; transition:color .15s; }
+    .rsx-doc-dl:hover { color:#3a5a55; }
+    .rsx-ev { display:flex; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid #f0f0ee; }
+    .rsx-ev:last-child { border-bottom:none; }
+    .rsx-ev-date { min-width:40px; text-align:center; flex-shrink:0; background:#3a5a55; border-radius:9px; padding:5px 0 4px; }
+    .rsx-ev-date b { display:block; font-size:15px; font-weight:700; color:#fdfcf8; line-height:1; }
+    .rsx-ev-date span { font-size:8.5px; color:#b3c6c1; display:block; margin-top:1px; }
+    .rsx-ev-date.soft { background:#eef2ea; }
+    .rsx-ev-date.soft b { color:#3a5a55; }
+    .rsx-ev-date.soft span { color:#3a5a55; }
+    .rsx-ev-info { flex:1; min-width:0; }
+    .rsx-ev-name { font-size:12px; font-weight:500; color:#1f2937; line-height:1.35; }
+
+    /* search suggestions */
+    .rsx-searchwrap { position:relative; }
+    .rsx-suggest { position:absolute; top:calc(100% + 8px); right:0; left:0; background:#fff; border-radius:10px; box-shadow:0 12px 34px rgba(0,0,0,.22); overflow:hidden; z-index:6; display:none; text-align:right; max-height:266px; overflow-y:auto; }
+    .rsx-suggest.open { display:block; }
+    .rsx-sug-item { display:flex; align-items:center; gap:10px; padding:10px 14px; cursor:pointer; border-bottom:1px solid #f2f2f0; transition:background .12s; }
+    .rsx-sug-item:last-child { border-bottom:none; }
+    .rsx-sug-item:hover { background:#f5f7f6; }
+    .rsx-sug-ic { width:26px; height:26px; border-radius:7px; background:#eef2ea; color:#3a5a55; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .rsx-sug-t { flex:1; font-size:12.5px; color:#1f2937; text-align:right; line-height:1.35; }
+    .rsx-sug-c { font-size:10px; font-weight:600; color:#3a5a55; background:#eef2ea; border-radius:99px; padding:3px 9px; flex-shrink:0; }
+    .rsx-sug-empty { padding:16px; text-align:center; color:#9ca3af; font-size:12.5px; }
+
+    /* PDF viewer screen */
+    #content-pdfview .pdf-body { flex:1; min-height:0; display:flex; flex-direction:column; background:#e9e9e6; }
+    .pdf-toolbar { height:46px; flex-shrink:0; background:#3a5a55; display:flex; align-items:center; gap:14px; padding:0 20px; }
+    .pdf-tb-back { display:flex; align-items:center; gap:6px; color:rgba(255,255,255,.9); font-size:12.5px; cursor:pointer; }
+    .pdf-tb-back:hover { color:#fff; }
+    .pdf-tb-title { flex:1; color:#eef3f1; font-size:12.5px; font-weight:500; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .pdf-tb-actions { display:flex; gap:14px; color:rgba(255,255,255,.85); }
+    .pdf-tb-actions svg { cursor:pointer; }
+    .pdf-scroll { flex:1; min-height:0; overflow-y:auto; padding:24px 0 30px; display:flex; justify-content:center; }
+    .pdf-page { width:660px; max-width:88%; background:#fff; box-shadow:0 6px 24px rgba(0,0,0,.16); border-radius:2px; padding:52px 60px; align-self:flex-start; }
+    .pdf-badge { font-size:10.5px; letter-spacing:.12em; color:#3a5a55; font-weight:700; margin-bottom:14px; }
+    .pdf-page h1 { font-size:22px; font-weight:700; color:#1f2937; line-height:1.35; }
+    .pdf-journal { font-size:12.5px; color:#3a5a55; margin-top:10px; font-style:italic; }
+    .pdf-authors { font-size:12px; color:#6b7280; margin-top:6px; }
+    .pdf-hr { height:1px; background:#ececec; margin:22px 0; }
+    .pdf-h2 { font-size:14px; font-weight:700; color:#3a5a55; margin-bottom:8px; }
+    .pdf-p { font-size:12.5px; color:#374151; line-height:1.9; margin-bottom:14px; text-align:justify; }
+    .pdf-fig { height:150px; background:#f3f5f3; border:1px solid #e5e7eb; border-radius:6px; display:flex; align-items:center; justify-content:center; color:#9ca3af; font-size:12px; margin:6px 0 18px; }
+
+    /* on-screen iPad keyboard (research search) */
+    #content-research { position:relative; }
+    .rsx-kb { position:absolute; left:0; right:0; bottom:0; background:#c9ccd2; padding:9px 12px 14px; box-shadow:0 -6px 22px rgba(0,0,0,.16); transform:translateY(110%); transition:transform .24s cubic-bezier(.22,.61,.36,1); z-index:25; }
+    #content-research.kb-open .rsx-kb { transform:translateY(0); }
+    .rsx-kb-bar { display:flex; align-items:center; justify-content:space-between; padding:0 4px 8px; }
+    .rsx-kb-hint { font-size:11px; color:#6b7280; }
+    .rsx-kb-hide { cursor:pointer; display:flex; padding:2px; }
+    .rsx-kb-row { display:flex; justify-content:center; gap:6px; margin-bottom:7px; }
+    .rsx-key { min-width:38px; height:44px; background:#fff; border-radius:6px; box-shadow:0 1px 0 rgba(0,0,0,.28); display:flex; align-items:center; justify-content:center; font-size:17px; color:#1f2937; cursor:pointer; flex:0 0 auto; padding:0 7px; user-select:none; font-family:inherit; }
+    .rsx-key:active { background:#e5e7eb; transform:translateY(1px); }
+    .rsx-key.wide { min-width:74px; font-size:14px; color:#374151; }
+    .rsx-key.space { flex:1; max-width:440px; font-size:13px; color:#6b7280; }
+    .rsx-key.act { background:#3a5a55; color:#fff; }
+    .rsx-key.act:active { background:#31504b; }
+
+    /* ===== note input widget (type / handwrite / voice) ===== */
+    .nmodes { display:flex; gap:6px; }
+    .nmode { font-size:10.5px; color:#6b7280; background:#f3f4f2; padding:4px 10px; border-radius:8px; cursor:pointer; user-select:none; transition:background .15s, color .15s; }
+    .nmode:hover { background:#e9eae7; }
+    .nmode.active { background:#2d4744; color:#fff; }
+    .npanel[hidden] { display:none; }
+    .ni-canvas { width:100%; height:100%; display:block; background:#fbfbfa; border:1px dashed #d3d8d4; border-radius:10px; cursor:crosshair; touch-action:none; }
+    .ni-draw-panel { position:relative; }
+    .ni-clear { position:absolute; top:8px; left:8px; font-size:10.5px; color:#6b7280; background:#fff; border:1px solid #e5e7eb; border-radius:7px; padding:3px 9px; cursor:pointer; font-family:inherit; }
+    .ni-clear:hover { background:#f3f4f2; }
+    .ni-voice { display:flex; align-items:center; gap:12px; padding:8px 2px; }
+    .ni-rec { display:inline-flex; align-items:center; gap:8px; background:#2d4744; color:#fff; border:none; border-radius:20px; padding:8px 16px; font-size:12.5px; font-weight:600; cursor:pointer; font-family:inherit; flex-shrink:0; }
+    .ni-rec.recording { background:#dc2626; }
+    .ni-rec-ic { width:11px; height:11px; border-radius:50%; background:#fff; display:inline-block; }
+    .ni-rec.recording .ni-rec-ic { border-radius:2px; animation:niPulse 1s infinite; }
+    @keyframes niPulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+    .ni-wave { display:flex; align-items:center; gap:3px; height:26px; flex:1; opacity:.3; }
+    .ni-wave i { width:3px; height:6px; background:#2d4744; border-radius:2px; }
+    .ni-voice.recording .ni-wave { opacity:1; }
+    .ni-voice.recording .ni-wave i { animation:niWave .8s ease-in-out infinite; }
+    .ni-wave i:nth-child(odd){ animation-delay:.15s; }
+    .ni-wave i:nth-child(3n){ animation-delay:.32s; }
+    @keyframes niWave { 0%,100%{height:6px;} 50%{height:22px;} }
+    .ni-time { font-size:12px; color:#6b7280; font-variant-numeric:tabular-nums; min-width:34px; }
+    .ni-clips { display:flex; flex-direction:column; gap:6px; }
+    .ni-clip { display:flex; align-items:center; gap:8px; background:#f3f6f4; border:1px solid #e2e8e4; border-radius:9px; padding:7px 11px; font-size:11.5px; color:#2d4744; }
+    .ni-clip svg { flex:0 0 auto; }
+    /* real-time context: widget fills the notes card */
+    .rt-notes-card .ni-body { flex:1; min-height:0; display:flex; }
+    .rt-notes-card .npanel { flex:1; min-height:0; display:flex; flex-direction:column; width:100%; }
+    .rt-notes-card .npanel[hidden] { display:none; }
+    .rt-notes-card .ni-canvas { flex:1; }
+    .rt-notes-card .nmodes { margin-bottom:2px; }
+    /* documentation context: fixed draw height */
+    #screen-tsummary .npanel[data-p="draw"] { height:170px; }
+    #screen-summary .npanel[data-p="draw"] { height:150px; }
+    /* patient screen mirror (real-time) */
+    .rt-mirror { background:#fff; border:1px solid #eaeaea; border-radius:14px; overflow:hidden; flex-shrink:0; }
+    .rt-mirror-head { display:flex; align-items:center; justify-content:space-between; padding:8px 12px; font-size:11px; color:#6b7280; }
+    .rt-mirror-live { display:inline-flex; align-items:center; gap:6px; color:#15803d; font-weight:600; }
+    .rt-mirror-live::before { content:''; width:7px; height:7px; border-radius:50%; background:#22c55e; animation:niPulse 1.4s infinite; }
+    .rt-mirror-screen { position:relative; width:100%; height:196px; background:#3a3f47; overflow:hidden; }
+    .rt-mirror-screen iframe { position:absolute; top:0; right:0; width:1194px; height:834px; border:0; transform:scale(.243); transform-origin:top right; pointer-events:none; }
+    /* real-time right panel: fit without scrolling */
+    #screen-realtime .rt-panel-right { overflow:hidden; gap:6px; }
+    #screen-realtime .rt-panel-right .rt-side-head { margin-bottom:4px; }
+    #screen-realtime .rt-panel-right .rt-stat-card { padding:5px 13px; border-radius:11px; }
+    #screen-realtime .rt-panel-right .rt-stat-label { font-size:10px; margin-bottom:1px; }
+    #screen-realtime .rt-panel-right .rt-stat-value { font-size:18px; line-height:1.05; }
+    #screen-realtime .rt-panel-right .rt-stat-sub { font-size:9.5px; margin-top:1px; line-height:1.3; }
+    #screen-realtime .rt-panel-right .rt-sysnotes .rt-stat-label { margin-bottom:3px; }
+    #screen-realtime .rt-panel-right .rt-note { font-size:10px; line-height:1.4; }
+    #screen-realtime .rt-mirror-screen { height:176px; }
+    .rsx-ev-sub { font-size:10px; color:#9a9482; margin-top:1px; }
+    .rsx-ev-urgent { font-size:9px; font-weight:700; color:#a04a2e; background:#f9ece7; border-radius:99px; padding:2.5px 8px; flex-shrink:0; }
     .rs-tag-cat { font-size:10px; font-weight:600; padding:4px 10px; border-radius:8px; background:#dbeafe; color:#1d4ed8; flex-shrink:0; align-self:center; }
     .rs-tag-cat.att { background:#fef3c7; color:#92400e; }
     .rs-tag-cat.lng { background:#fce7f3; color:#9d174d; }
@@ -575,7 +741,7 @@
     .st-actions { display:flex; gap:8px; margin-top:auto; padding-top:12px; }
 
     /* ══ SESSION SUMMARY ══ */
-    #screen-summary { position:absolute; inset:0; display:none; flex-direction:column; background:#f5f5f3; font-family:'Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
+    #screen-summary { position:absolute; inset:0; display:none; flex-direction:column; background:#f5f5f3; font-family:'Simpler Pro','Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
     .sum-sidebar { width:64px; height:100%; background:white; display:flex; flex-direction:column; align-items:center; padding:18px 0; border-left:1px solid #f0f0ee; flex-shrink:0; }
     .sum-main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
     .sum-header { height:58px; background:white; border-bottom:1px solid #f0f0ee; display:flex; align-items:center; justify-content:space-between; padding:0 28px; flex-shrink:0; }
@@ -616,7 +782,7 @@
     /* ===== Screen: זמן אמת ===== */
     #screen-realtime {
       position:absolute; inset:0; display:none; flex-direction:column;
-      background:#f5f5f3; font-family:'Noto Sans Hebrew','Segoe UI',Arial,sans-serif;
+      background:#f5f5f3; font-family:'Simpler Pro','Noto Sans Hebrew','Segoe UI',Arial,sans-serif;
     }
     .rt-topbar {
       display:flex; align-items:center; justify-content:space-between;
@@ -775,18 +941,19 @@
     .rt-btn-summary:hover { background:#f1f6f4; }
     .rt-btn-summary:active { transform:scale(0.97); }
 
-    /* unify real-time control buttons — equal size */
+    /* compact real-time control buttons, aligned to the right */
+    .rt-controls-row { justify-content:flex-start; }
     .rt-controls-row .rt-btn-stop,
     .rt-controls-row .rt-btn-summary,
     .rt-controls-row .rt-btn-save {
-      flex:1 1 0; align-self:stretch; margin-top:0;
-      padding:0 14px; height:42px; min-width:0;
+      flex:0 0 auto; align-self:center; margin-top:0;
+      padding:0 14px; height:32px; min-width:0; font-size:12px;
       display:inline-flex; align-items:center; justify-content:center;
       white-space:nowrap; box-sizing:border-box;
     }
 
     /* ══ TRAINING SUMMARY SCREEN ══ */
-    #screen-tsummary { position:absolute; inset:0; display:none; flex-direction:column; background:#f5f5f3; font-family:'Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
+    #screen-tsummary { position:absolute; inset:0; display:none; flex-direction:column; background:#f5f5f3; font-family:'Simpler Pro','Noto Sans Hebrew','Segoe UI',Arial,sans-serif; }
     .ts-main { flex:1; display:flex; flex-direction:column; overflow:hidden; min-height:0; }
     .ts-scroll { flex:1; overflow-y:auto; padding:14px 30px; display:flex; flex-direction:column; gap:9px; }
     .ts-header { display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; }
@@ -797,7 +964,7 @@
     .ts-sec-head { display:flex; justify-content:space-between; align-items:center; flex-shrink:0; margin-top:2px; }
     .ts-sec-title { font-size:14px; font-weight:600; color:#1f2937; }
     .ts-sec-meta { font-size:11px; color:#9ca3af; font-weight:400; }
-    .ts-auto-tag { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:#6b8b83; background:#f1f6f4; padding:4px 9px; border-radius:20px; }
+    .ts-auto-tag { display:inline-flex; align-items:center; gap:5px; font-size:10px; color:#3a5a55; background:#f1f6f4; padding:4px 9px; border-radius:20px; }
     .ts-auto-tag.sm { font-size:9.5px; }
 
     .ts-insights { display:flex; gap:12px; flex-shrink:0; }
@@ -821,7 +988,7 @@
     .ts-card-title { font-size:14px; font-weight:600; color:#1f2937; text-align:right; }
     .ts-card-sub { font-size:10.5px; color:#9ca3af; margin-top:2px; text-align:right; }
     .ts-doc-titles { text-align:right; }
-    .ts-doc-edit { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:#6b8b83; cursor:pointer; }
+    .ts-doc-edit { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:#3a5a55; cursor:pointer; }
     .ts-doc-toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
     .ts-doc-label { font-size:11px; color:#9ca3af; }
     .ts-doc-modes { display:flex; gap:6px; }
@@ -1466,7 +1633,7 @@
                     <path id="graph-area-fill" d="M72,40 L210,62 L348,71 L486,86 L624,107 L624,148 L72,148 Z" fill="url(#graphAreaGrad)"/>
                     <!-- Clinical target dashed line (500ms → y=127) -->
                     <line x1="72" y1="127" x2="624" y2="127" stroke="#9ab0aa" stroke-width="1.5" stroke-dasharray="5,4"/>
-                    <text x="105" y="120" text-anchor="start" font-size="10" fill="#6b8b83" font-weight="600">יעד קליני · 500ms</text>
+                    <text x="105" y="120" text-anchor="start" font-size="10" fill="#3a5a55" font-weight="600">יעד קליני · 500ms</text>
                     <!-- Main line -->
                     <polyline id="graph-main-line" points="72,40 210,62 348,71 486,86 624,107" fill="none" stroke="#2d4744" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
                     <!-- Data points -->
@@ -1953,132 +2120,155 @@
           <span class="app-logo">NEUROCANOPY</span>
         </div>
         <div class="dash-content">
-          <div class="welcome">
-            <div class="patient-nav home-crumb" onclick="navigate('dashboard')">חזרה למסך הבית <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div>
-            <h1>מחקרים</h1>
-            <p>מאגר ידע מקצועי — מאמרים, מחקרים ועדכונים קליניים רלוונטיים לתחום השיקום הקוגניטיבי.</p>
+          <div class="rsx-banner">
+            <div class="rsx-banner-fx"></div>
+            <div class="rsx-bannercrumb"><div class="patient-nav home-crumb" onclick="navigate('dashboard')">חזרה למסך הבית <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+            <div class="rsx-banner-inner">
+              <h1 class="rsx-title">מחקרים</h1>
+              <div class="rsx-tabs">
+                <span class="rsx-tab active">מאמרים מומלצים</span>
+                <span class="rsx-tab">חומרי הדרכה</span>
+                <span class="rsx-tab">פרסומים אחרונים</span>
+                <span class="rsx-tab">השתלמויות ווובינרים</span>
+              </div>
+              <div class="rsx-mod">
+                <div class="rsx-chips">
+                  <span class="rsx-chip-f active">הכל</span>
+                  <span class="rsx-chip-f">שבץ</span>
+                  <span class="rsx-chip-f">זיכרון</span>
+                  <span class="rsx-chip-f">קשב</span>
+                  <span class="rsx-chip-f">שפה</span>
+                </div>
+                <div class="rsx-searchwrap">
+                  <div class="rsx-searchbar">
+                    <input id="rsx-search" type="text" placeholder="חיפוש במאמרים, פרוטוקולים וחומרי הדרכה…" autocomplete="off" onfocus="rsxSearchFocus()" oninput="rsxSearchInput(this.value)" onblur="rsxSearchBlur()" onkeydown="if(event.key==='Enter'){rsxSearchGo();}">
+                    <button class="rsx-searchbtn" aria-label="חיפוש" onclick="rsxSearchGo()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+                  </div>
+                  <div class="rsx-suggest" id="rsx-suggest"></div>
+                </div>
+                <div class="rsx-modmeta">
+                  <span><b>8</b> מאמרים חדשים</span>
+                  <span><b>23</b> שמורים לקריאה</span>
+                  <span><b>14</b> נקראו החודש</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div style="display:flex;gap:11px;margin-bottom:11px;flex-shrink:0;">
-            <div class="stat-card">
-              <div class="stat-label">מאמרים חדשים</div>
-              <div class="stat-value">8</div>
-              <div class="stat-sub green">↑ בתחומי העניין שלך</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">מאמרים שמורים</div>
-              <div class="stat-value">23</div>
-              <div class="stat-sub">לקריאה מאוחרת</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">נקראו החודש</div>
-              <div class="stat-value">14</div>
-              <div class="stat-sub green">↑ 4 מהחודש שעבר</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-label">נושאים במעקב</div>
-              <div class="stat-value">5</div>
-              <div class="stat-sub">שבץ · זיכרון · קשב</div>
-            </div>
-          </div>
-          <div class="cards-grid">
-            <div class="cards-row">
-              <div class="card" style="flex:1.5;">
-                <div class="card-header"><span class="card-title">מאמרים מומלצים עבורך</span><span class="card-link">לכל המאמרים</span></div>
-                <div class="rs-row">
-                  <div class="rs-info">
-                    <div class="rs-name">אימון ממוחשב של זיכרון עבודה לאחר שבץ — סקירה שיטתית</div>
-                    <div class="rs-sub">Journal of Neurorehabilitation · רלוונטי ל-4 מהמטופלים שלך עם פגיעת זיכרון</div>
-                  </div>
-                  <span class="pill pill-green">חדש</span>
-                  <span class="rs-tag-cat">זיכרון</span>
-                </div>
-                <div class="rs-row">
-                  <div class="rs-info">
-                    <div class="rs-name">פרוטוקולי נוירופידבק לשיפור קשב מתמשך בגיל המבוגר</div>
-                    <div class="rs-sub">Clinical Neuropsychology · מתאים למסלול הקשב שאתה מנחה</div>
-                  </div>
-                  <span class="pill pill-green">חדש</span>
-                  <span class="rs-tag-cat att">קשב</span>
-                </div>
-                <div class="rs-row">
-                  <div class="rs-info">
-                    <div class="rs-name">תרגול שפה מותאם-גיל בשיקום אפזיה — קווים מנחים</div>
-                    <div class="rs-sub">Aging &amp; Cognition · הנחיות קליניות מעודכנות 2026</div>
-                  </div>
-                  <span class="rs-tag-cat lng">שפה</span>
-                </div>
+          <div class="rsx-cards">
+            <div class="rsx-col">
+              <div class="rsx-sechead"><span>מאמרים מומלצים עבורך</span><i></i></div>
+              <div class="rsx-list">
+                <div class="rsx-art"><span class="rsx-num">01</span><div class="rsx-art-info"><div class="rsx-art-name">אימון ממוחשב של זיכרון עבודה לאחר שבץ — סקירה שיטתית</div></div></div>
+                <div class="rsx-art"><span class="rsx-num">02</span><div class="rsx-art-info"><div class="rsx-art-name">פרוטוקולי נוירופידבק לשיפור קשב מתמשך בגיל המבוגר</div></div></div>
+                <div class="rsx-art"><span class="rsx-num">03</span><div class="rsx-art-info"><div class="rsx-art-name">תרגול שפה מותאם-גיל בשיקום אפזיה — קווים מנחים</div></div></div>
               </div>
-              <div class="card" style="flex:1;">
-                <div class="card-header"><span class="card-title">חומרי הדרכה למטופלים</span><span class="card-link">לכל החומרים</span></div>
-                <div class="edu-row">
-                  <span class="edu-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
-                  <div class="edu-info">
-                    <div class="edu-name">מדריך תרגול ביתי — שיקום זיכרון</div>
-                    <div class="edu-meta">PDF · 6 עמודים · עודכן השבוע</div>
-                  </div>
-                  <span class="edu-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-                </div>
-                <div class="edu-row">
-                  <span class="edu-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
-                  <div class="edu-info">
-                    <div class="edu-name">סרטון הסבר: מהו נוירופידבק?</div>
-                    <div class="edu-meta">וידאו · 4 דקות · לשיתוף עם המטופל</div>
-                  </div>
-                  <span class="edu-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-                </div>
-                <div class="edu-row">
-                  <span class="edu-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
-                  <div class="edu-info">
-                    <div class="edu-name">דף מעקב יומי אחר תרגול</div>
-                    <div class="edu-meta">PDF להדפסה · עברית</div>
-                  </div>
-                  <span class="edu-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-                </div>
-                <div class="edu-row">
-                  <span class="edu-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span>
-                  <div class="edu-info">
-                    <div class="edu-name">הנחיות למשפחה — תמיכה בשיקום קוגניטיבי</div>
-                    <div class="edu-meta">PDF · 3 עמודים</div>
-                  </div>
-                  <span class="edu-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span>
-                </div>
-              </div>
+              <div class="rsx-seclink">לכל המאמרים</div>
             </div>
-            <div class="cards-row">
-              <div class="card" style="flex:1;">
-                <div class="card-header"><span class="card-title">פרסומים אחרונים</span><span class="card-link">לכל הפרסומים</span></div>
-                <div class="research-item"><div class="research-title">טכנולוגיות מסייעות בשיקום דיבור לאחר שבץ מוחי</div><div class="research-jrnl">Journal of Neurorehabilitation · 18 באוקטובר 2026</div></div>
-                <div class="research-item"><div class="research-title">השפעת מוזיקה על זיכרון עבודה אצל קשישים</div><div class="research-jrnl">Aging &amp; Cognition · 12 באוקטובר 2026</div></div>
-                <div class="research-item"><div class="research-title">פרוטוקולים חדשים לטיפול בהפרעות קשב פוסט-טראומטיות</div><div class="research-jrnl">Clinical Neuropsychology · 05 באוקטובר 2026</div></div>
-                <div class="research-item"><div class="research-title">מדדי הצלחה בתרגול קוגניטיבי ביתי — סקירה שיטתית</div><div class="research-jrnl">Frontiers in Rehabilitation · 28 בספטמבר 2026</div></div>
+            <div class="rsx-col">
+              <div class="rsx-sechead"><span>חומרי הדרכה למטופלים</span><i></i></div>
+              <div class="rsx-list">
+                <div class="rsx-doc"><span class="rsx-doc-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span><div class="rsx-doc-info"><div class="rsx-doc-name">מדריך תרגול ביתי — שיקום זיכרון</div></div><span class="rsx-doc-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></div>
+                <div class="rsx-doc"><span class="rsx-doc-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span><div class="rsx-doc-info"><div class="rsx-doc-name">סרטון הסבר: מהו נוירופידבק?</div></div><span class="rsx-doc-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></div>
+                <div class="rsx-doc"><span class="rsx-doc-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span><div class="rsx-doc-info"><div class="rsx-doc-name">דף מעקב יומי אחר תרגול</div></div><span class="rsx-doc-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></div>
+                <div class="rsx-doc"><span class="rsx-doc-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></span><div class="rsx-doc-info"><div class="rsx-doc-name">הנחיות למשפחה — תמיכה בשיקום קוגניטיבי</div></div><span class="rsx-doc-dl" title="הורדה"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></span></div>
               </div>
-              <div class="card" style="flex:1;">
-                <div class="card-header"><span class="card-title">השתלמויות ווובינרים</span><span class="card-link">ללוח המלא</span></div>
-                <div class="ms-row">
-                  <span class="alert-dot alert-dot-red" style="margin-top:5px;"></span>
-                  <div class="ms-info"><div class="ms-name">וובינר: עדכונים בשיקום שפה לאחר שבץ</div><div class="ms-sub">מכון נוירו · אונליין · נותרו 5 ימים</div></div>
-                  <span class="ms-date">29 אוק</span>
-                </div>
-                <div class="ms-row">
-                  <span class="alert-dot alert-dot-amber" style="margin-top:5px;"></span>
-                  <div class="ms-info"><div class="ms-name">השתלמות: כלים דיגיטליים בשיקום קוגניטיבי</div><div class="ms-sub">הכשרה מקצועית · 4 שעות גמול</div></div>
-                  <span class="ms-date">06 נוב</span>
-                </div>
-                <div class="ms-row">
-                  <span class="alert-dot alert-dot-green" style="margin-top:5px;"></span>
-                  <div class="ms-info"><div class="ms-name">כנס שנתי לשיקום קוגניטיבי</div><div class="ms-sub">הרצאות וסדנאות · תל אביב</div></div>
-                  <span class="ms-date">20 נוב</span>
-                </div>
-                <div class="ms-row">
-                  <span class="alert-dot" style="background:#9ca3af;margin-top:5px;"></span>
-                  <div class="ms-info"><div class="ms-name">סדנה: פרשנות מדדי נוירופידבק בקליניקה</div><div class="ms-sub">סדנה מעשית · מספר מקומות מוגבל</div></div>
-                  <span class="ms-date">04 דצמ</span>
-                </div>
+              <div class="rsx-seclink">לכל החומרים</div>
+            </div>
+            <div class="rsx-col">
+              <div class="rsx-sechead"><span>פרסומים אחרונים</span><i></i></div>
+              <div class="rsx-list">
+                <div class="rsx-art"><span class="rsx-num">01</span><div class="rsx-art-info"><div class="rsx-art-name">טכנולוגיות מסייעות בשיקום דיבור לאחר שבץ מוחי</div></div></div>
+                <div class="rsx-art"><span class="rsx-num">02</span><div class="rsx-art-info"><div class="rsx-art-name">השפעת מוזיקה על זיכרון עבודה אצל קשישים</div></div></div>
+                <div class="rsx-art"><span class="rsx-num">03</span><div class="rsx-art-info"><div class="rsx-art-name">פרוטוקולים חדשים לטיפול בהפרעות קשב פוסט-טראומטיות</div></div></div>
+                <div class="rsx-art"><span class="rsx-num">04</span><div class="rsx-art-info"><div class="rsx-art-name">מדדי הצלחה בתרגול קוגניטיבי ביתי — סקירה שיטתית</div></div></div>
               </div>
+              <div class="rsx-seclink">לכל הפרסומים</div>
+            </div>
+            <div class="rsx-col">
+              <div class="rsx-sechead"><span>השתלמויות ווובינרים</span><i></i></div>
+              <div class="rsx-list">
+                <div class="rsx-ev"><span class="rsx-ev-date"><b>29</b><span>אוק</span></span><div class="rsx-ev-info"><div class="rsx-ev-name">וובינר: עדכונים בשיקום שפה לאחר שבץ</div></div></div>
+                <div class="rsx-ev"><span class="rsx-ev-date soft"><b>06</b><span>נוב</span></span><div class="rsx-ev-info"><div class="rsx-ev-name">השתלמות: כלים דיגיטליים בשיקום קוגניטיבי</div></div></div>
+                <div class="rsx-ev"><span class="rsx-ev-date soft"><b>20</b><span>נוב</span></span><div class="rsx-ev-info"><div class="rsx-ev-name">כנס שנתי לשיקום קוגניטיבי</div></div></div>
+                <div class="rsx-ev"><span class="rsx-ev-date soft"><b>04</b><span>דצמ</span></span><div class="rsx-ev-info"><div class="rsx-ev-name">סדנה: פרשנות מדדי נוירופידבק בקליניקה</div></div></div>
+              </div>
+              <div class="rsx-seclink">ללוח המלא</div>
             </div>
           </div>
         </div>
+          <div class="rsx-kb">
+            <div class="rsx-kb-bar">
+              <span class="rsx-kb-hint">מקלדת</span>
+              <span class="rsx-kb-hide" onmousedown="rsxKbHide(event)" title="סגירת מקלדת"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4b5563" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="12" rx="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><path d="M8 20l4 3 4-3"/></svg></span>
+            </div>
+            <div class="rsx-kb-row"><span class="rsx-key" onmousedown="rsxKey(event,'ק')">ק</span><span class="rsx-key" onmousedown="rsxKey(event,'ר')">ר</span><span class="rsx-key" onmousedown="rsxKey(event,'א')">א</span><span class="rsx-key" onmousedown="rsxKey(event,'ט')">ט</span><span class="rsx-key" onmousedown="rsxKey(event,'ו')">ו</span><span class="rsx-key" onmousedown="rsxKey(event,'ן')">ן</span><span class="rsx-key" onmousedown="rsxKey(event,'ם')">ם</span><span class="rsx-key" onmousedown="rsxKey(event,'פ')">פ</span></div>
+            <div class="rsx-kb-row"><span class="rsx-key" onmousedown="rsxKey(event,'ש')">ש</span><span class="rsx-key" onmousedown="rsxKey(event,'ד')">ד</span><span class="rsx-key" onmousedown="rsxKey(event,'ג')">ג</span><span class="rsx-key" onmousedown="rsxKey(event,'כ')">כ</span><span class="rsx-key" onmousedown="rsxKey(event,'ע')">ע</span><span class="rsx-key" onmousedown="rsxKey(event,'י')">י</span><span class="rsx-key" onmousedown="rsxKey(event,'ח')">ח</span><span class="rsx-key" onmousedown="rsxKey(event,'ל')">ל</span><span class="rsx-key" onmousedown="rsxKey(event,'ך')">ך</span><span class="rsx-key" onmousedown="rsxKey(event,'ף')">ף</span></div>
+            <div class="rsx-kb-row"><span class="rsx-key" onmousedown="rsxKey(event,'ז')">ז</span><span class="rsx-key" onmousedown="rsxKey(event,'ס')">ס</span><span class="rsx-key" onmousedown="rsxKey(event,'ב')">ב</span><span class="rsx-key" onmousedown="rsxKey(event,'ה')">ה</span><span class="rsx-key" onmousedown="rsxKey(event,'נ')">נ</span><span class="rsx-key" onmousedown="rsxKey(event,'מ')">מ</span><span class="rsx-key" onmousedown="rsxKey(event,'צ')">צ</span><span class="rsx-key" onmousedown="rsxKey(event,'ת')">ת</span><span class="rsx-key" onmousedown="rsxKey(event,'ץ')">ץ</span></div>
+            <div class="rsx-kb-row">
+              <span class="rsx-key wide" onmousedown="rsxKeyBksp(event)">⌫ מחיקה</span>
+              <span class="rsx-key space" onmousedown="rsxKeySpace(event)">רווח</span>
+              <span class="rsx-key act wide" onmousedown="rsxKeyGo(event)">חיפוש</span>
+            </div>
+          </div>
       </div><!-- /content-research -->
+
+      <!-- ── PDF VIEWER ── -->
+      <div id="content-pdfview" class="app-content" style="display:none;">
+        <div class="app-header">
+          <div class="app-header-right"><strong>ד״ר גלית שחר</strong><span style="margin:0 8px;color:#d1d5db;">|</span><span>יום שלישי, 24 באוקטובר 2026</span></div>
+          <span class="app-logo">NEUROCANOPY</span>
+        </div>
+        <div class="pdf-body">
+          <div class="pdf-toolbar">
+            <div class="pdf-tb-back" onclick="navigate('research')"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg><span>חזרה למחקרים</span></div>
+            <div class="pdf-tb-title" id="pdf-doc-title">מסמך</div>
+            <div class="pdf-tb-actions">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" title="הורדה"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" title="הדפסה"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            </div>
+          </div>
+          <div class="pdf-scroll" id="pdf-scroll">
+            <div class="pdf-page">
+              <div class="pdf-badge">מאמר · PDF</div>
+              <h1 id="pdf-page-title">—</h1>
+              <div class="pdf-journal" id="pdf-journal"></div>
+              <div class="pdf-authors">מאת ד״ר נ. לוי, פרופ׳ א. כהן ו-ד״ר ר. אבידן · המכון לשיקום קוגניטיבי · 2026</div>
+              <div class="pdf-hr"></div>
+              <div class="pdf-h2">תקציר</div>
+              <div class="pdf-p">מאמר זה בוחן את יעילותם של פרוטוקולי תרגול קוגניטיבי מותאמים-אישית באוכלוסייה שלאחר אירוע מוחי. במחקר השתתפו 84 נבדקים אשר חולקו באקראי לקבוצת התערבות ולקבוצת ביקורת, ונאספו מדדי ביצוע לאורך שנים-עשר שבועות. הממצאים מצביעים על שיפור מובהק בזמני התגובה ובדיוק המשימות בקבוצת ההתערבות, לצד רמות מוטיבציה גבוהות יותר לאורך כל תקופת המחקר.</div>
+              <div class="pdf-p">ממצאי המחקר תומכים בשילובם של כלים דיגיטליים אדפטיביים בעבודה הקלינית, כחלק ממערך טיפול משולב הכולל ליווי אנושי צמוד. במאמר נדונות גם ההשלכות המעשיות עבור קלינאי התקשורת והדרכים לשילוב הגישה בשגרת המרפאה.</div>
+              <div class="pdf-h2">1. מבוא</div>
+              <div class="pdf-p">שיקום קוגניטיבי מבוסס-טכנולוגיה הפך בשנים האחרונות לכלי מרכזי בעבודתם של קלינאי התקשורת. עבודה זו מציגה סקירה של הגישות העדכניות ומנתחת את יישומן בקליניקה, תוך התייחסות להתאמה האישית של רמות הקושי ולמעורבות המשפחה בתהליך.</div>
+              <div class="pdf-p">מטרת המחקר הנוכחי היא לבחון האם התאמה אוטומטית של רמת הקושי, המבוססת על ביצועי המטופל בזמן אמת, משפרת את התוצאות הטיפוליות בהשוואה לפרוטוקול קבוע. שאלה זו רלוונטית במיוחד לאוכלוסיית מטופלים שלאחר שבץ, המאופיינת בשונות גבוהה בקצב ההתקדמות ובפרופיל הקשיים.</div>
+              <div class="pdf-p">בעשור האחרון הצטבר גוף ידע נרחב המצביע על יתרונותיה של הלמידה האדפטיבית בהקשרים חינוכיים ורפואיים כאחד. עם זאת, מחקרים מבוקרים באוכלוסיית השיקום הנוירולוגי עודם מעטים יחסית, וקיים צורך בהמשגה שיטתית של העקרונות המנחים את בניית הפרוטוקולים.</div>
+              <div class="pdf-h2">2. רקע תיאורטי</div>
+              <div class="pdf-p">העיקרון המרכזי העומד בבסיס הגישה האדפטיבית הוא שמירה על רמת אתגר מיטבית — לא קלה מדי, שתוביל לשעמום, ולא קשה מדי, שתוביל לתסכול ולנטישה. עקרון זה נשען על תיאוריות למידה קלאסיות ומקבל חיזוק ממחקרי הדמיה עדכניים על גמישות עצבית.</div>
+              <div class="pdf-p">בהקשר של שיקום שלאחר שבץ, ההתאמה האישית מאפשרת להתחשב במגוון רחב של גורמים: סוג הפגיעה, מיקומה, הזמן שחלף מהאירוע, ומצבו הרגשי של המטופל. מערכת אדפטיבית טובה מנטרת גורמים אלו ומגיבה אליהם באופן רציף.</div>
+              <div class="pdf-h2">3. שיטת המחקר</div>
+              <div class="pdf-p">במחקר השתתפו 84 מטופלים בגילאי 52–79, שנדגמו משלוש מרפאות שיקום. כל המשתתפים עברו הערכה נוירופסיכולוגית בסיסית טרם תחילת ההתערבות, וחולקו באקראי לשתי קבוצות שוות בגודלן. קבוצת ההתערבות תרגלה באמצעות מערכת אדפטיבית, בעוד קבוצת הביקורת תרגלה בפרוטוקול קבוע.</div>
+              <div class="pdf-p">מדדי התוצאה העיקריים כללו דיוק במשימות שיום, זמן תגובה ממוצע, ומספר הניסיונות עד להשלמת משימה. הנתונים נאספו אוטומטית על ידי המערכת ונותחו באמצעות מודלים מעורבים של שונות, תוך פיקוח על משתני רקע דמוגרפיים וקליניים.</div>
+              <div class="pdf-p">הפרוטוקול כלל שלוש מפגשי תרגול שבועיים בני עשרים דקות כל אחד, לאורך שנים-עשר שבועות. שיעורי ההיענות תועדו בקפידה, ומטופלים אשר החמיצו יותר משלושה מפגשים הוצאו מהניתוח הסופי.</div>
+              <div class="pdf-h2">4. ממצאים</div>
+              <div class="pdf-p">קבוצת ההתערבות הציגה שיפור ממוצע של 27% בדיוק המשימות, לעומת 11% בקבוצת הביקורת. ההבדל נמצא מובהק סטטיסטית לאורך כל נקודות המדידה החל מהשבוע הרביעי ואילך.</div>
+              <div class="pdf-p">בנוסף, נמצא כי זמני התגובה בקבוצת ההתערבות התקצרו בהדרגה, מ-4.2 שניות בממוצע בתחילת המחקר ל-2.6 שניות בסיומו. לא נצפתה השפעה משמעותית של גיל או מין על גודל האפקט.</div>
+              <div class="pdf-p">מדד המוטיבציה, שנאסף באמצעות שאלון דיווח-עצמי בסוף כל שבוע, היה גבוה יותר באופן עקבי בקבוצת ההתערבות. מטופלים דיווחו על תחושת מסוגלות גבוהה יותר ועל רצון להמשיך בתרגול גם מעבר לתקופת המחקר.</div>
+              <div class="pdf-h2">5. דיון</div>
+              <div class="pdf-p">הממצאים תומכים בהשערה כי התאמה אישית ורציפה של רמת הקושי מובילה לתוצאות טיפוליות טובות יותר. ייתכן שההסבר לכך טמון בשמירה על "אזור התפתחות מיטבי" — רמת אתגר גבוהה מספיק כדי לקדם למידה, אך לא גבוהה עד כדי תסכול.</div>
+              <div class="pdf-p">מעבר לשיפור במדדים האובייקטיביים, בולטת גם ההשפעה על המוטיבציה. ממצא זה עולה בקנה אחד עם הספרות המדגישה את חשיבותה של חוויית ההצלחה בתהליך השיקום, ומדגיש את הצורך לשלב שיקולים רגשיים בתכנון הפרוטוקול.</div>
+              <div class="pdf-p">למחקר מספר מגבלות: משך המעקב היה קצר יחסית, והוא לא כלל הערכת שימור לאורך זמן. כמו כן, המדגם נלקח משלוש מרפאות בלבד, ולכן יש להיזהר בהכללת הממצאים לאוכלוסיות אחרות. מומלץ שמחקרי המשך יבחנו את יציבות האפקט חצי שנה ושנה לאחר סיום ההתערבות.</div>
+              <div class="pdf-h2">6. מסקנות</div>
+              <div class="pdf-p">פרוטוקולי תרגול אדפטיביים מהווים כלי יעיל ומבטיח בשיקום קוגניטיבי שלאחר שבץ. שילובם בעבודה הקלינית היומיומית, לצד ליווי אנושי של הקלינאי, עשוי לשפר משמעותית את חוויית המטופל ואת תוצאות הטיפול.</div>
+              <div class="pdf-p">אנו ממליצים לקלינאים לשקול אימוץ הדרגתי של כלים אלו, תוך התאמתם למאפייני המרפאה ולצרכים הייחודיים של כל מטופל. שילוב מושכל של טכנולוגיה ומגע אנושי הוא, לדעתנו, המפתח לשיקום אפקטיבי ומיטיב.</div>
+              <div class="pdf-hr"></div>
+              <div class="pdf-h2">מקורות</div>
+              <div class="pdf-p">1. Cohen, A., Levy, N. (2025). Adaptive difficulty in post-stroke cognitive training. Journal of Neurorehabilitation.</div>
+              <div class="pdf-p">2. Avidan, R. et al. (2024). Family involvement in home-based rehabilitation. Aging &amp; Cognition.</div>
+              <div class="pdf-p">3. Ben-David, S. (2025). Motivation and self-efficacy in neurological rehabilitation. Clinical Neuropsychology.</div>
+              <div class="pdf-p">4. World Health Organization (2026). Guidelines for cognitive rehabilitation.</div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /content-pdfview -->
 
       <!-- ── SETTINGS ── -->
       <div id="content-settings" class="app-content" style="display:none;">
@@ -2181,7 +2371,7 @@
 
           <!-- Middle band -->
           <div class="ts-cols">
-            <div class="ts-doc-card">
+            <div class="ts-doc-card" data-ni>
               <div class="ts-card-head">
                 <span class="ts-doc-edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg> תיעוד ידני</span>
                 <div class="ts-doc-titles"><div class="ts-card-title">תיעוד מפגש</div><div class="ts-card-sub">תיעוד אוטומטי משולב בהערות אישיות שלך</div></div>
@@ -2190,10 +2380,10 @@
               <div class="ts-sys-row">אברהם השלים את כל חמשת התרגילים תוך 42 דקות, עם זמן תגובה ממוצע של 571 שניות. ביצועים גבוהים במיוחד בתרגילי שיום (92%).</div>
               <div class="ts-sys-row">זוהו 2 קשיים חוזרים בתרגיל זיכרון עבודה (פריטים 4 ו-7 ברצף הספרתי). מומלץ לבחון העמקה באבחון של עומס מתמשך.</div>
               <div class="ts-doc-toolbar" style="margin-top:9px;">
-                <div class="ts-doc-modes"><span class="ts-mode active">הקלדה</span><span class="ts-mode">כתב יד</span><span class="ts-mode">הקלטה קולית</span></div>
+                <div class="ts-doc-modes nmodes"><span class="nmode active" data-m="type">הקלדה</span><span class="nmode" data-m="draw">כתב יד</span><span class="nmode" data-m="voice">הקלטה קולית</span></div>
                 <span class="ts-doc-label">הערות ידניות</span>
               </div>
-              <div class="ts-doc-text">אברהם הגיע במצב רוח טוב ועם רצון להתחיל. ניכר שיפור בזרימה המילולית, אך עדיין נצפתה עייפות לקראת הדקה ה-30. מציעה להתחיל את המפגש הבא בתרגיל שטף ולהשאיר את זיכרון העבודה לאמצע המפגש.</div>
+              <div class="ni-body"><div class="npanel" data-p="type"><textarea class="ts-doc-text ni-text" oninput="tsAutoGrow(this)">אברהם הגיע במצב רוח טוב ועם רצון להתחיל. ניכר שיפור בזרימה המילולית, אך עדיין נצפתה עייפות לקראת הדקה ה-30. מציעה להתחיל את המפגש הבא בתרגיל שטף ולהשאיר את זיכרון העבודה לאמצע המפגש.</textarea></div><div class="npanel ni-draw-panel" data-p="draw" hidden><canvas class="ni-canvas"></canvas><button type="button" class="ni-clear">ניקוי</button></div><div class="npanel" data-p="voice" hidden><div class="ni-voice"><button type="button" class="ni-rec"><span class="ni-rec-ic"></span><span class="ni-rec-label">התחלת הקלטה</span></button><div class="ni-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="ni-time">0:00</span></div><div class="ni-clips"></div></div></div>
             </div>
             <div class="ts-right-col">
               <div class="sm-card">
@@ -2224,7 +2414,7 @@
                 <div class="sm-chart-wrap">
                   <svg viewBox="0 0 480 150" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="display:block;" font-family="'Noto Sans Hebrew',sans-serif">
                     <line x1="40" y1="115" x2="452" y2="115" stroke="#9ab0aa" stroke-width="1.3" stroke-dasharray="5,4"/>
-                    <text x="452" y="111" text-anchor="end" font-size="9.5" fill="#6b8b83" font-weight="600">יעד 500s</text>
+                    <text x="452" y="111" text-anchor="end" font-size="9.5" fill="#3a5a55" font-weight="600">יעד 500s</text>
                     <polyline points="56,33 132,44 208,57 284,68 360,78 436,88" fill="none" stroke="#2d4744" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
                     <circle cx="56" cy="33" r="3.5" fill="white" stroke="#2d4744" stroke-width="2"/>
                     <circle cx="132" cy="44" r="3.5" fill="white" stroke="#2d4744" stroke-width="2"/>
@@ -2342,9 +2532,14 @@
 
               <div class="rt-work">
                 <!-- Clinician side -->
-                <div class="rt-notes-card">
+                <div class="rt-notes-card" data-ni>
                   <div class="rt-side-head"><span class="rt-side-badge clin">הקלינאית · ניטור ובקרה</span></div>
-                  <textarea class="rt-notes-area" placeholder="כתיבת הערות תוך כדי הצפייה במטופל..."></textarea>
+                  <div class="nmodes"><span class="nmode active" data-m="type">הקלדה</span><span class="nmode" data-m="draw">כתב יד</span><span class="nmode" data-m="voice">הקלטה קולית</span></div>
+                  <div class="ni-body">
+                    <div class="npanel" data-p="type"><textarea class="rt-notes-area ni-text" placeholder="כתיבת הערות תוך כדי הצפייה במטופל..."></textarea></div>
+                    <div class="npanel ni-draw-panel" data-p="draw" hidden><canvas class="ni-canvas"></canvas><button type="button" class="ni-clear">ניקוי</button></div>
+                    <div class="npanel" data-p="voice" hidden><div class="ni-voice"><button type="button" class="ni-rec"><span class="ni-rec-ic"></span><span class="ni-rec-label">התחלת הקלטה</span></button><div class="ni-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="ni-time">0:00</span></div><div class="ni-clips"></div></div>
+                  </div>
                   <div class="rt-controls-row">
                     <button class="rt-btn-stop" onclick="stopRealtimeExercise()">עצירת תרגיל</button>
                     <button class="rt-btn-summary" onclick="navigate('tsummary')">הוספת סיכום תרגול</button>
@@ -2354,6 +2549,10 @@
                 <!-- Patient side -->
                 <div class="rt-panel-right">
                   <div class="rt-side-head"><span class="rt-side-badge pat"><span class="rt-pat-dot"></span>המטופל · בזמן אמת</span></div>
+                  <div class="rt-mirror">
+                    <div class="rt-mirror-head"><span>מסך המטופל</span><span class="rt-mirror-live">שידור חי</span></div>
+                    <div class="rt-mirror-screen"><iframe id="rt-mirror-frame" src="patient.html" scrolling="no" title="מסך המטופל"></iframe></div>
+                  </div>
                   <div class="rt-stat-card">
                     <div class="rt-stat-label">אחוזי הצלחה</div>
                     <div class="rt-stat-value negative" id="rt-stat-acc">&minus;5%</div>
@@ -2412,22 +2611,22 @@
           <div class="ts-insights">
             <div class="ts-insight ts-in-green">
               <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></span>
-              <div class="ts-in-body"><div class="ts-in-label">שיפור מרכזי</div><p>שיפור של 7% בדיוק לעומת המפגש הקודם, בולט במיוחד בתרגילי שיום מהיר וזיהוי רצף.</p></div>
+              <div class="ts-in-body"><div class="ts-in-label">מה הצליח</div><p>שיום מהיר וזיהוי רצף — 92% דיוק, שיפור של 7% מהמפגש הקודם. אברהם ביצע אותם במהירות וללא היסוס.</p></div>
             </div>
             <div class="ts-insight ts-in-amber">
               <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
-              <div class="ts-in-body"><div class="ts-in-label">אזור אתגר</div><p>אזור אתגר: זמן תגובה בתרגילי זיכרון עבודה גבוה ב-14% מהיעד הקליני. מומלץ להמשיך בעומס מדורג.</p></div>
+              <div class="ts-in-body"><div class="ts-in-label">מה עוד לא הצליח</div><p>זיכרון עבודה — 3 מתוך 5 ניסיונות נכשלו. זמן התגובה הממוצע 57 שניות, גבוה ב-14% מהיעד הקליני.</p></div>
             </div>
             <div class="ts-insight ts-in-blue">
               <span class="ts-in-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-              <div class="ts-in-body"><div class="ts-in-label">תחזית התקדמות</div><p>תחזית התקדמות: בקצב הנוכחי, היעד הקליני (500ms) צפוי להיות מושג תוך 2–3 מפגשים נוספים.</p></div>
+              <div class="ts-in-body"><div class="ts-in-label">מה בהמשך</div><p>להתחיל את המפגש הבא בתרגיל שטף קל ולהעלות בהדרגה את עומס הזיכרון. בקצב הנוכחי היעד צפוי להיות מושג תוך 2–3 מפגשים.</p></div>
             </div>
           </div>
 
           <!-- Two columns -->
           <div class="ts-cols">
             <!-- Left: session documentation -->
-            <div class="ts-doc-card">
+            <div class="ts-doc-card" data-ni>
               <div class="ts-card-head">
                 <span class="ts-doc-edit"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg> תיעוד ידני</span>
                 <div class="ts-doc-titles">
@@ -2436,14 +2635,18 @@
                 </div>
               </div>
               <div class="ts-doc-toolbar">
-                <div class="ts-doc-modes">
-                  <span class="ts-mode active">הקלדה</span>
-                  <span class="ts-mode">כתב יד</span>
-                  <span class="ts-mode">הקלטה קולית</span>
+                <div class="ts-doc-modes nmodes">
+                  <span class="nmode active" data-m="type">הקלדה</span>
+                  <span class="nmode" data-m="draw">כתב יד</span>
+                  <span class="nmode" data-m="voice">הקלטה קולית</span>
                 </div>
                 <span class="ts-doc-label">הערות ידניות</span>
               </div>
-              <textarea class="ts-doc-text" oninput="tsAutoGrow(this)" placeholder="כתיבת הערות...">אברהם הגיע במצב רוח טוב ועם רצון להתחיל.</textarea>
+              <div class="ni-body">
+                <div class="npanel" data-p="type"><textarea class="ts-doc-text ni-text" oninput="tsAutoGrow(this)" placeholder="כתיבת הערות...">אברהם הגיע במצב רוח טוב ועם רצון להתחיל.</textarea></div>
+                <div class="npanel ni-draw-panel" data-p="draw" hidden><canvas class="ni-canvas"></canvas><button type="button" class="ni-clear">ניקוי</button></div>
+                <div class="npanel" data-p="voice" hidden><div class="ni-voice"><button type="button" class="ni-rec"><span class="ni-rec-ic"></span><span class="ni-rec-label">התחלת הקלטה</span></button><div class="ni-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="ni-time">0:00</span></div><div class="ni-clips"></div></div>
+              </div>
             </div>
 
             <!-- Right: system summary + exercise breakdown -->
@@ -2609,6 +2812,116 @@
     if (icon) icon.classList.add('active');
   }
   function openPatient() { navigate('patient'); }
+
+  /* ===== Research: search suggestions + PDF viewer ===== */
+  var RSX_ITEMS = [
+    {t:'אימון ממוחשב של זיכרון עבודה לאחר שבץ — סקירה שיטתית', j:'Journal of Neurorehabilitation · 2026', c:'זיכרון'},
+    {t:'פרוטוקולי נוירופידבק לשיפור קשב מתמשך בגיל המבוגר', j:'Clinical Neuropsychology · 2026', c:'קשב'},
+    {t:'תרגול שפה מותאם-גיל בשיקום אפזיה — קווים מנחים', j:'Aging & Cognition · 2026', c:'שפה'},
+    {t:'טכנולוגיות מסייעות בשיקום דיבור לאחר שבץ מוחי', j:'Journal of Neurorehabilitation · 18 באוקטובר 2026', c:'שפה'},
+    {t:'השפעת מוזיקה על זיכרון עבודה אצל קשישים', j:'Aging & Cognition · 12 באוקטובר 2026', c:'זיכרון'},
+    {t:'פרוטוקולים חדשים לטיפול בהפרעות קשב פוסט-טראומטיות', j:'Clinical Neuropsychology · 05 באוקטובר 2026', c:'קשב'},
+    {t:'מדדי הצלחה בתרגול קוגניטיבי ביתי — סקירה שיטתית', j:'Frontiers in Rehabilitation · 28 בספטמבר 2026', c:'זיכרון'},
+    {t:'מדריך תרגול ביתי — שיקום זיכרון', j:'חומר הדרכה · PDF · 6 עמודים', c:'זיכרון'},
+    {t:'דף מעקב יומי אחר תרגול', j:'חומר הדרכה · PDF להדפסה', c:''},
+    {t:'הנחיות למשפחה — תמיכה בשיקום קוגניטיבי', j:'חומר הדרכה · PDF · 3 עמודים', c:''}
+  ];
+  function _rsxEsc(x){ return (x||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+  function rsxRenderSuggest(q){
+    var box=document.getElementById('rsx-suggest'); if(!box) return;
+    q=(q||'').trim();
+    var list = q ? RSX_ITEMS.filter(function(it){ return it.t.indexOf(q)>=0 || it.c.indexOf(q)>=0; }) : RSX_ITEMS.slice(0,6);
+    if(!list.length){ box.innerHTML='<div class="rsx-sug-empty">לא נמצאו תוצאות עבור \''+_rsxEsc(q)+'\'</div>'; box.classList.add('open'); return; }
+    box.innerHTML = list.map(function(it){
+      return '<div class="rsx-sug-item" data-t="'+_rsxEsc(it.t)+'" onmousedown="rsxPick(this)">'
+        + '<span class="rsx-sug-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>'
+        + '<span class="rsx-sug-t">'+_rsxEsc(it.t)+'</span>'
+        + (it.c ? '<span class="rsx-sug-c">'+_rsxEsc(it.c)+'</span>' : '')
+        + '</div>';
+    }).join('');
+    box.classList.add('open');
+  }
+  function rsxSearchFocus(){ rsxRenderSuggest(document.getElementById('rsx-search').value); rsxKbShow(); }
+  function rsxSearchInput(v){ rsxRenderSuggest(v); }
+  function rsxSearchBlur(){ setTimeout(function(){ var b=document.getElementById('rsx-suggest'); if(b) b.classList.remove('open'); rsxKbHide(); }, 160); }
+  function rsxSearchGo(){ var el=document.getElementById('rsx-search'); var v=(el?el.value:'').trim(); var list=v?RSX_ITEMS.filter(function(it){return it.t.indexOf(v)>=0||it.c.indexOf(v)>=0;}):RSX_ITEMS; if(list.length) openPdf(list[0].t); }
+  function rsxPick(elm){ openPdf(elm.getAttribute('data-t')); }
+  function openPdfFromEl(elm){ var n=elm.querySelector('.rsx-art-name,.rsx-doc-name'); openPdf(n?n.textContent.trim():''); }
+  function openPdf(title){
+    var meta=null; for(var i=0;i<RSX_ITEMS.length;i++){ if(RSX_ITEMS[i].t===title){ meta=RSX_ITEMS[i]; break; } }
+    var dt=document.getElementById('pdf-doc-title'); if(dt) dt.textContent=title||'מסמך';
+    var pt=document.getElementById('pdf-page-title'); if(pt) pt.textContent=title||'';
+    var jr=document.getElementById('pdf-journal'); if(jr) jr.textContent=(meta&&meta.j)?meta.j:'';
+    var sb=document.getElementById('rsx-suggest'); if(sb) sb.classList.remove('open');
+    rsxKbHide();
+    navigate('pdfview');
+    var ic=document.querySelector('.sb-icon[data-screen="research"]'); if(ic) ic.classList.add('active');
+    var body=document.getElementById('pdf-scroll'); if(body) body.scrollTop=0;
+  }
+  function _rsxKbType(ch){ var el=document.getElementById('rsx-search'); if(!el) return; el.value += ch; rsxRenderSuggest(el.value); }
+  function rsxKey(e,ch){ if(e) e.preventDefault(); _rsxKbType(ch); }
+  function rsxKeySpace(e){ if(e) e.preventDefault(); _rsxKbType(' '); }
+  function rsxKeyBksp(e){ if(e) e.preventDefault(); var el=document.getElementById('rsx-search'); if(!el) return; el.value=el.value.slice(0,-1); rsxRenderSuggest(el.value); }
+  function rsxKeyGo(e){ if(e) e.preventDefault(); rsxSearchGo(); }
+  function rsxKbShow(){ var r=document.getElementById('content-research'); if(r) r.classList.add('kb-open'); }
+  function rsxKbHide(e){ if(e) e.preventDefault(); var r=document.getElementById('content-research'); if(r) r.classList.remove('kb-open'); }
+
+  /* ===== note input widget: type / handwrite / voice ===== */
+  function niCanvasSetup(cv){
+    if(cv._ready) return;
+    var r=cv.getBoundingClientRect();
+    if(r.width<2 || r.height<2) return;
+    cv.width=r.width; cv.height=r.height; cv._ready=true;
+    var ctx=cv.getContext('2d'); ctx.lineWidth=2.4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.strokeStyle='#2d4744';
+    var drawing=false;
+    function pos(e){ var b=cv.getBoundingClientRect(); var t=(e.touches&&e.touches[0])?e.touches[0]:e; return {x:t.clientX-b.left, y:t.clientY-b.top}; }
+    function start(e){ drawing=true; var p=pos(e); ctx.beginPath(); ctx.moveTo(p.x,p.y); if(e.cancelable) e.preventDefault(); }
+    function move(e){ if(!drawing) return; var p=pos(e); ctx.lineTo(p.x,p.y); ctx.stroke(); if(e.cancelable) e.preventDefault(); }
+    function end(){ drawing=false; }
+    cv.addEventListener('pointerdown',start); cv.addEventListener('pointermove',move); window.addEventListener('pointerup',end);
+    cv._clear=function(){ ctx.clearRect(0,0,cv.width,cv.height); };
+  }
+  function niVoiceSetup(root){
+    var box=root.querySelector('.ni-voice'); if(!box || box._ready) return; box._ready=true;
+    var btn=box.querySelector('.ni-rec'), lbl=box.querySelector('.ni-rec-label'), time=box.querySelector('.ni-time');
+    var clips=root.querySelector('.ni-clips'); var t=0, iv=null, rec=false;
+    function fmt(x){ var m=Math.floor(x/60), ss=x%60; return m+':'+(ss<10?'0'+ss:ss); }
+    btn.addEventListener('click',function(){
+      rec=!rec;
+      if(rec){ box.classList.add('recording'); btn.classList.add('recording'); lbl.textContent='עצירת הקלטה'; t=0; time.textContent='0:00'; iv=setInterval(function(){ t++; time.textContent=fmt(t); },1000); }
+      else { clearInterval(iv); box.classList.remove('recording'); btn.classList.remove('recording'); lbl.textContent='התחלת הקלטה';
+        if(t>0 && clips){ var c=document.createElement('div'); c.className='ni-clip'; c.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> הקלטה קולית · '+fmt(t); clips.appendChild(c); }
+        time.textContent='0:00'; }
+    });
+  }
+  function wireNoteInput(root){
+    if(root._ni) return; root._ni=true;
+    var modes=[].slice.call(root.querySelectorAll('.nmode'));
+    var panels=[].slice.call(root.querySelectorAll('.npanel'));
+    modes.forEach(function(m){
+      m.addEventListener('click',function(){
+        modes.forEach(function(x){ x.classList.remove('active'); }); m.classList.add('active');
+        var mode=m.getAttribute('data-m');
+        panels.forEach(function(p){ p.hidden = (p.getAttribute('data-p')!==mode); });
+        if(mode==='draw'){ var cv=root.querySelector('.ni-canvas'); if(cv){ setTimeout(function(){ niCanvasSetup(cv); },20); } }
+        if(mode==='voice'){ niVoiceSetup(root); }
+      });
+    });
+    var clr=root.querySelector('.ni-clear');
+    if(clr) clr.addEventListener('click',function(){ var cv=root.querySelector('.ni-canvas'); if(cv&&cv._clear) cv._clear(); });
+  }
+  (function(){
+    function boot(){
+      [].slice.call(document.querySelectorAll('[data-ni]')).forEach(wireNoteInput);
+      var mf=document.getElementById('rt-mirror-frame');
+      if(mf){ mf.addEventListener('load',function(){ try{ if(mf.contentWindow && mf.contentWindow.go) mf.contentWindow.go('screen-missing'); }catch(e){} }); }
+    }
+    if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded',boot);
+  })();
+  (function rsxWireRows(){
+    var rows=document.querySelectorAll('#content-research .rsx-art, #content-research .rsx-doc');
+    rows.forEach(function(r){ r.style.cursor='pointer'; r.addEventListener('click', function(){ openPdfFromEl(this); }); });
+  })();
   function logOut() {
     document.getElementById('app-shell').style.display = 'none';
     var lg = document.getElementById('screen-login');
